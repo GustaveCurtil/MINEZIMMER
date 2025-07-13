@@ -17,6 +17,9 @@ return new class extends Migration
             $table->foreignId('upper_room')->nullable()->constrained('rooms')->onDelete('cascade');
             $table->string('name');
             $table->string('slug');
+            $table->string('color')->nullable();
+            $table->string('bgColor')->nullable();
+            $table->string('icon_path')->default('0-B/1_066.ICO');
             $table->timestamps();
         });
     }

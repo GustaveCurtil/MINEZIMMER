@@ -11,6 +11,9 @@ class Room extends Model
         'upper_room',
         'name',
         'slug',
+        'color',
+        'bgColor', 
+        'icon_path'
     ];
 
     public function parent()

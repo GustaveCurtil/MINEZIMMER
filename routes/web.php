@@ -14,3 +14,5 @@ Route::post('/uitloggen', [UserController::class, 'logout'])->name('account.logo
 Route::post('/inloggen', [UserController::class, 'login'])->name('account.login');
 
 Route::post('/kamermaken', [RoomController::class, 'create'])->name('room.create');
+Route::post('/kleuraanpassen', [RoomController::class, 'customizeColor'])->name('room.customizeColor');
+Route::post('/veranderpictogram', [RoomController::class, 'changeIcon'])->name('room.changeIcon');

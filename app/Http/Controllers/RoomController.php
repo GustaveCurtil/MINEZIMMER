@@ -25,4 +25,29 @@ class RoomController extends Controller
 
         return redirect()->back();
     }
+
+    public function customizeColor(Request $request) 
+    {
+        $room = Room::where('id', $request->id)->firstOrFail();
+
+        if ($room) {
+            $room->color = $request->color;
+            $room->bgColor = $request->bgColor;
+            $room->update();        
+        }
+
+        return redirect()->back();
+    }
+
+    public function changeIcon(Request $request) 
+    {
+        $room = Room::where('id', $request->id)->firstOrFail();
+
+        if ($room) {
+            $room->icon_path = $request->icon_path;
+            $room->update();        
+        }
+
+        return redirect()->back();
+    }
 }

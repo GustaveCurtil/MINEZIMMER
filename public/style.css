@@ -4,4 +4,65 @@
     box-sizing: border-box;
 }
 
-img {aspect-ratio: 1/1;}
+body {
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+main {
+    width: 100%;
+}
+
+#control-panel {
+    display: flex;
+        flex-wrap: wrap;
+}
+
+#tree-structure {
+    display: inline-flex;
+    align-items: center;
+}
+
+#icons {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#icons img, img.icon {
+    aspect-ratio: 1/1;
+    width: 32px;
+}
+
+#iconSelector {
+    width: 100%;
+}
+
+#iconSelector div {
+    height: 64px;
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 0;
+}
+
+#iconSelector input[type="radio"] {
+    display: none;
+}
+
+#iconSelector label {
+    display: inline-block;
+     cursor: pointer;
+     aspect-ratio: 1/1;
+}
+
+#iconSelector input[type="radio"]:checked + img {
+        border: 4px solid #ff0000;
+    }
