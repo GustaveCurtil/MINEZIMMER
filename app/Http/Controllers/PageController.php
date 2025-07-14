@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\File;
 class PageController extends Controller
 {
     public function home() {
-        $rooms = Room::where('level', 0)->get();
+        $rooms = Room::all();
         $iconFiles = File::allFiles(public_path('icons'));
         return view('home', ['rooms' => $rooms, 'iconFiles' => $iconFiles]);
     }

@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $fillable = [
-        'level',
-        'upper_room',
         'name',
         'slug',
+        'code',
         'color',
         'bgColor', 
         'icon_path'

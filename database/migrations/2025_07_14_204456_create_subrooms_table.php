@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('subrooms', function (Blueprint $table) {
             $table->id();
+            $table->integer('level');
+            $table->foreignId('upper_room')->nullable()->constrained('rooms')->onDelete('cascade');
             $table->string('name');
             $table->string('slug');
-            $table->string('code')->unique()->nullable();
             $table->string('color')->nullable();
             $table->string('bgColor')->nullable();
             $table->string('icon_path')->default('0-B/1_066.ICO');
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('subrooms');
     }
 };

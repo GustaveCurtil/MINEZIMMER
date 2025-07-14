@@ -12,15 +12,11 @@ class RoomController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255|min:2',
-            'level' => 'required|integer',
-            'upper_room' => 'nullable'
         ]);
 
-        $room = Room::create([
+        Room::create([
             'name' => $validated['name'],
             'slug' => Str::slug('"' . $validated['name'] . '"'),
-            'level' => $validated['level'],
-            'upper_room' => $validated['upper_room']
         ]);
 
         return redirect()->back();

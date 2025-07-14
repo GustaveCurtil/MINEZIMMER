@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('style.css')}}">
+    @yield('scripts')
     <title>Kamercollecties</title>
 </head>
 <style>
@@ -13,18 +14,11 @@
         background-color: @yield('bgColor');
     }
 </style>
-<body>
-    <header>
-        <section id="control-panel">
-            @yield('control-panel')
-        </section>
-    </header>
     
-    @auth
-    <main>
-    @yield('main') 
-    </main>
-    @else
+@auth
+@yield('body')
+@else
+<body id="aanmelden">
     <main>
         <h3>Aanmelden</h3>
         <form action="{{ route('account.register') }}" method="POST">
@@ -43,6 +37,6 @@
             <button type="submit">Inloggen</button>
         </form>
     </main>
-    @endauth
 </body>
+@endauth
 </html>

@@ -1,5 +1,9 @@
 @extends('_layouts.head')
 
+@section('scripts')
+<script src="{{ asset('js/controls.js')}}"></script>
+@endsection
+
 @section('color')
 @if (isset($subroom)) 
 {{ $subroom->color }}
@@ -16,7 +20,8 @@
 @endif
 @endsection
 
-@section('main')
+@section('body')
+<body>
 <section id="tree-structure">
     <h2><img src="{{asset('/icons/' . $room->icon_path)}}" alt="" srcset=""> {{ $room->name }}</h2>
     @if (isset($subroom))   
@@ -28,6 +33,37 @@
     </p>
     @endif
 </section>
+@if (!isset($subroom))
+<a href="{{ url('/') }}">terug</a>
+@elseif ($subroom->level === 1)
+<a href="{{ url('/' . $room->id . '-' . $room->slug) }}">terug</a>
+@else
+<a href="{{ url('/' . $room->id . '-' . $room->slug . '/' . $subroom->parent->id . '-' . $subroom->parent->slug) }}">terug</a>
+@endif
+<form action="{{ route('room.customizeColor') }}" method="post">
+    @csrf
+    <input type="color" name="color" id="color"  @if(isset($subroom)) value="{{ $subroom->color }}" @else value="{{ $room->color }}" @endif>
+    <input type="color" name="bgColor" id="bgColor"  @if(isset($subroom)) value="{{ $subroom->bgColor }}" @else value="{{ $room->bgColor }}" @endif>
+    <input type="hidden" name="id" @if(isset($subroom)) value="{{ $subroom->id }}" @else value="{{ $room->id }}" @endif>
+    <button type="submit">kleur aanpassen</button>
+</form>
+<form action="{{ route('room.changeIcon') }}" method="post" id="iconSelector">
+    @csrf
+    <button type="submit">pictogram veranderen</button>
+    <div>
+    @foreach ($iconFiles as $file)
+        <label style="text-align: center;">
+            <input type="radio" name="icon_path" value="{{ $file->getRelativePathname() }}" required>
+            <img src="{{ asset('icons/' . $file->getRelativePathname()) }}" 
+                    alt="{{ $file->getFilename() }}" 
+                    class="icon">
+        </label>
+    @endforeach
+    </div>
+    <input type="hidden" name="id" @if(isset($subroom)) value="{{ $subroom->id }}" @else value="{{ $room->id }}" @endif>
+    
+</form>
+
 <section>
     @foreach ($subrooms as $item)
     <div class="weergave" style="color: {{ $item->color }}; background-color: {{ $item->bgColor }}">
@@ -39,16 +75,7 @@
     </div>           
     @endforeach      
 </section>
-@endsection
-
-@section('control-panel')
-    @if (!isset($subroom))
-    <a href="{{ url('/') }}">terug</a>
-    @elseif ($subroom->level === 1)
-    <a href="{{ url('/' . $room->id . '-' . $room->slug) }}">terug</a>
-    @else
-    <a href="{{ url('/' . $room->id . '-' . $room->slug . '/' . $subroom->parent->id . '-' . $subroom->parent->slug) }}">terug</a>
-    @endif
+<section id="control-panel">
     <form action="{{ route('room.create')}}" method="POST">
         @csrf
         <input type="text" name="name" id="name" placeholder="binnenkamer">
@@ -56,28 +83,6 @@
         <input type="hidden" name="upper_room" @if(isset($subroom)) value="{{ $subroom->id }}" @else value="{{ $room->id }}" @endif >
         <button type="submit">maak kamer</button>
     </form>
-    <form action="{{ route('room.customizeColor') }}" method="post">
-        @csrf
-        <input type="color" name="color" id="color"  @if(isset($subroom)) value="{{ $subroom->color }}" @else value="{{ $room->color }}" @endif>
-        <input type="color" name="bgColor" id="bgColor"  @if(isset($subroom)) value="{{ $subroom->bgColor }}" @else value="{{ $room->bgColor }}" @endif>
-        <input type="hidden" name="id" @if(isset($subroom)) value="{{ $subroom->id }}" @else value="{{ $room->id }}" @endif>
-        <button type="submit">kleur aanpassen</button>
-    </form>
-    <form action="{{ route('room.changeIcon') }}" method="post" id="iconSelector">
-        @csrf
-        <button type="submit">pictogram veranderen</button>
-        <div>
-        @foreach ($iconFiles as $file)
-            <label style="text-align: center;">
-                <input type="radio" name="icon_path" value="{{ $file->getRelativePathname() }}" required>
-                <img src="{{ asset('icons/' . $file->getRelativePathname()) }}" 
-                     alt="{{ $file->getFilename() }}" 
-                     class="icon">
-            </label>
-        @endforeach
-        </div>
-
-        <input type="hidden" name="id" @if(isset($subroom)) value="{{ $subroom->id }}" @else value="{{ $room->id }}" @endif>
-        
-    </form>
+</section>
+</body>
 @endsection
