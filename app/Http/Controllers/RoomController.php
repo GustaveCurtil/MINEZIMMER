@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
@@ -14,7 +15,10 @@ class RoomController extends Controller
             'name' => 'required|string|max:255|min:2',
         ]);
 
+        $user = Auth::user();
+
         Room::create([
+            'user_id' => $user->id,
             'name' => $validated['name'],
             'slug' => Str::slug('"' . $validated['name'] . '"'),
         ]);

@@ -9,33 +9,33 @@
 }
 
 body {
-    overflow-x: hidden;
+    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
 }
 
 header {
     width: 100%;
-    height: var(--height-header);
+    height: calc(2 * var(--height-header));
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
-header * {
+header>* {
     height: var(--height-header);
 }
 
-header>div:first-of-type{display: flex;}
+header>div:first-of-type{display: flex;     justify-content: space-between;}
 
 main:not(#aanmelden main) {
     width: calc(100% - 400px);
-    height: calc(100svh - var(--height-header));
+    height: calc(100svh - 2 * var(--height-header));
 }
 
 aside {
     width: 400px;
-    height: calc(100svh - var(--height-header));
+    height: calc(100svh - 2 * var(--height-header));
+    max-height: calc(100svh - 2 * var(--height-header));
     background-color: #ff0000;
 }
 
@@ -72,14 +72,13 @@ aside {
 
 #iconSelector {
     width: 100%;
-}
-
-#iconSelector:not(.actief) {
-    display: none;
+    height: calc(100svh - 3 * var(--height-header));
+    display: flex;
+    flex-direction: column;
 }
 
 #iconSelector div {
-    height: 64px;
+    height: 100%;
     width: 100%;
     overflow-y: auto;
     display: flex;
@@ -115,4 +114,9 @@ aside {
 
 .paneel:not(.actief) {
     display: none;
+}
+
+.paneel {
+    height: calc(100svh - 2 * var(--height-header));
+    max-height: calc(100svh - 2 * var(--height-header));
 }

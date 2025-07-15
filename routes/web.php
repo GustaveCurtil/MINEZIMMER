@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubroomController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/{id}-{slug}', [PageController::class, 'room'])->middleware('auth');
@@ -14,5 +15,11 @@ Route::post('/uitloggen', [UserController::class, 'logout'])->name('account.logo
 Route::post('/inloggen', [UserController::class, 'login'])->name('account.login');
 
 Route::post('/kamermaken', [RoomController::class, 'create'])->name('room.create');
+Route::post('/naamwijzigen', [RoomController::class, 'editName'])->name('room.editName');
 Route::post('/kleuraanpassen', [RoomController::class, 'customizeColor'])->name('room.customizeColor');
 Route::post('/veranderpictogram', [RoomController::class, 'changeIcon'])->name('room.changeIcon');
+
+Route::post('/subkamermaken', [SubroomController::class, 'create'])->name('subroom.create');
+Route::post('/subnaamwijzigen', [SubroomController::class, 'editName'])->name('subroom.editName');
+Route::post('/subkleuraanpassen', [SubroomController::class, 'customizeColor'])->name('subroom.customizeColor');
+Route::post('/verandersubpictogram', [SubroomController::class, 'changeIcon'])->name('subroom.changeIcon');

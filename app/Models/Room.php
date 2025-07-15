@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
     protected $fillable = [
+        'user_id',
         'name',
         'slug',
         'code',
@@ -15,26 +16,14 @@ class Room extends Model
         'icon_path'
     ];
 
-    public function parent()
+    public function user()
     {
-        return $this->belongsTo(Room::class, 'upper_room');
+        return $this->belongsTo(Room::class, 'user_id');
     }
 
-    public function allParents()
-    {
-        $parents = [];
-        $room = $this;
-
-        while ($room->parent) {
-            $room = $room->parent;
-            array_unshift($parents, $room);  // adds to beginning, so order is from top parent down
-        }
-
-        return $parents;  // this is a plain PHP array with numeric keys
-    }
     
     public function children()
     {
-        return $this->hasMany(Room::class, 'upper_room');
+        return $this->hasMany(Subroom::class, 'upper_room_id');
     }
 }

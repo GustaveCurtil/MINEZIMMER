@@ -3,23 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\Subroom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class PageController extends Controller
 {
     public function home() {
+        $user = Auth::user();
         $rooms = Room::all();
         $iconFiles = File::allFiles(public_path('icons'));
-        return view('home', ['rooms' => $rooms, 'iconFiles' => $iconFiles]);
+        return view('home', ['user' => $user, 'rooms' => $rooms, 'iconFiles' => $iconFiles]);
     }
 
     public function room($id, $slug) {
-        $room = $room = Room::where('id', $id)->where('slug', $slug)->firstOrFail();
-        $subrooms = Room::where('upper_room', $room->id)->where('level', $room->level + 1)->get();
+        $user = Auth::user();
+        $actualRoom = Room::where('id', $id)->where('slug', $slug)->firstOrFail();
+        $children = Subroom::where('room_id', $actualRoom->id)->where('level', 1)->get();
         $iconFiles = File::allFiles(public_path('icons'));
-        if ($room) {
-            return view('room', ['room' => $room, 'subrooms' => $subrooms, 'iconFiles' => $iconFiles]);  
+        if ($actualRoom) {
+            return view('room', ['user' => $user, 'actualRoom' => $actualRoom, 'children' => $children, 'iconFiles' => $iconFiles]);  
         } else {
             return redirect('/');
         }
@@ -28,15 +32,13 @@ class PageController extends Controller
 
     public function subroom($id, $slug, $subId, $subSlug)
     {
-        $room = Room::where('id', $id)->where('slug', $slug)->firstOrFail();
-        $subroom = Room::where('id', $subId)->where('slug', $subSlug)->firstOrFail();
-        $subrooms = Room::where('upper_room', $subroom->id)->where('level', $subroom->level + 1)->get();
+        $user = Auth::user();
+        $actualRoom = Room::where('id', $id)->where('slug', $slug)->firstOrFail();
+        $actualSubroom = Subroom::where('id', $subId)->where('slug', $subSlug)->firstOrFail();
+        $children = Subroom::where('room_id', $actualRoom->id)->where('level', $actualSubroom->level + 1)->get();
         $iconFiles = File::allFiles(public_path('icons'));
-
-        if ($subroom) {
-            return view('room', ['room' => $room, 'subroom' => $subroom, 'subrooms' => $subrooms, 'iconFiles' => $iconFiles]);
-        } elseif ($room) {
-            return redirect('/' . $room->id . '-' . $room->slug);
+        if ($actualSubroom) {
+            return view('room', ['user' => $user, 'actualRoom' => $actualRoom, 'actualSubroom' => $actualSubroom, 'children' => $children, 'iconFiles' => $iconFiles]);  
         } else {
             return redirect('/');
         }
