@@ -9,9 +9,8 @@
 <body>
     <header>
         @auth
-        <p>{{ $user->name }} > <a href="{{ url('/' . $actualRoom->id . '-' . $actualRoom->slug) }}">{{ $actualRoom->name }}</a>
+        <p><a href="{{ url('/')}}">{{ $user->name }}</a> > <a href="{{ url('/' . $actualRoom->id . '-' . $actualRoom->slug) }}">{{ $actualRoom->name }}</a>
         @if (isset($actualSubroom) && $actualRoom !== $actualSubroom)   
-        {{ count($actualSubroom->parents())}}
         @for ($i = 0; $i < count($actualSubroom->parents()); $i++)
         &nbsp;> <a href="{{ url('/' . $actualRoom->id . '-' . $actualRoom->slug . '/' . $actualSubroom->parents()[$i]->id . '-' . $actualSubroom->parents()[$i]->slug) }}">{{ $actualSubroom->parents()[$i]->name }}</a>
         @endfor
