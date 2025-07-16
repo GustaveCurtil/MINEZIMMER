@@ -9,20 +9,56 @@
 <body>
     <header>
         @auth
-        <p>{{ $user->name }}</p>
+        <p>Welgekomen, {{ $user->name }}</p>            
+        <form action="{{ route('account.logout') }}" method="POST">
+            @csrf
+            <button type="submit">Uitloggen</button>
+        </form>        
         @endauth
-        <div>
-            <form action="{{ route('room.create')}}" method="POST">
-                @csrf
-                <input type="text" name="name" id="name">
-                <button type="submit">maak ruimte</button>
-            </form>
-            <form action="{{ route('account.logout') }}" method="POST">
-                @csrf
-                <button type="submit">Uitloggen</button>
-            </form>
-        </div>
     </header>
+    <aside>
+        <section id="view">
+            <div id="welkom">
+                <p>Welkom G, </p>
+                <p>Ik weet nog niet wat de bedoeling van deze website is, maar ik probeer het al bouwend vorm te geven snap je? Alsof ik niets beters heb te doen. <//3 Mopje ik vind dit gewoon leuk zeneu</p>
+            </div>
+            <div class="create">
+                <form action="{{ route('room.create')}}" method="POST">
+                    @csrf
+                    <input type="text" name="name" id="name">
+                    <button type="submit">maak ruimte</button>
+                </form>
+            </div>
+            <div class="create">
+                <form action="{{ route('room.create')}}" method="POST">
+                    @csrf
+                    <input type="text" name="name" id="name">
+                    <button type="submit">maak tekst</button>
+                </form>
+            </div>
+            <div class="create">
+                <form action="{{ route('room.create')}}" method="POST">
+                    @csrf
+                    <input type="text" name="name" id="name">
+                    <button type="submit">maak foto</button>
+                </form>
+            </div>
+
+            @foreach ($rooms as $room)
+            <div class="room">
+                <img src="{{ asset('icons/' . $room->icon_path)}}" alt="" srcset="">
+                <h2>{{ $room->name }}</h2>                     
+            </div>
+            
+            @endforeach
+        </section>
+        <section id="controls">
+            Voeg toe: 
+            <button>kamer</button>
+            <button>tekst</button>
+            <button>foto</button>
+        </section>
+    </aside>
     <main>
         @foreach ($rooms as $room)
         <div class="weergave" style="color: {{ $room->color }}; background-color: {{ $room->bgColor }}">
@@ -33,32 +69,5 @@
         </div>             
         @endforeach  
     </main> 
-    <aside>
-        @foreach ($rooms as $room)
-        <div class="paneel" style="color: {{ $room->color }}; background-color: {{ $room->bgColor }}">
-            <h2>{{ $room->name }}</h2>
-            <form action="{{ route('room.editName')}}" method="POST">
-                @csrf
-                <input type="text" name="name" id="name" value="{{ $room->name }}">
-                <button type="submit">maak ruimte</button>
-            </form>
-            <form action="{{ route('room.changeIcon') }}" method="post" id="iconSelector">
-                @csrf
-                <button type="submit">pictogram veranderen</button>
-                <div>
-                @foreach ($iconFiles as $file)
-                    <label style="text-align: center;">
-                        <input type="radio" name="icon_path" value="{{ $file->getRelativePathname() }}" required>
-                        <img src="{{ asset('icons/' . $file->getRelativePathname()) }}" 
-                                alt="{{ $file->getFilename() }}" 
-                                class="icon">
-                    </label>
-                @endforeach
-                </div>
-                <input type="hidden" name="id" @if(isset($subroom)) value="{{ $subroom->id }}" @else value="{{ $room->id }}" @endif>   
-            </form>
-        </div>             
-        @endforeach 
-    </aside>
 </body>
 @endsection

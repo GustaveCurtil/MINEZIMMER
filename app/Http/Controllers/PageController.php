@@ -23,7 +23,7 @@ class PageController extends Controller
         $children = Subroom::where('room_id', $actualRoom->id)->where('level', 1)->get();
         $iconFiles = File::allFiles(public_path('icons'));
         if ($actualRoom) {
-            return view('room', ['user' => $user, 'actualRoom' => $actualRoom, 'children' => $children, 'iconFiles' => $iconFiles]);  
+            return view('room', ['user' => $user, 'actualRoom' => $actualRoom, 'actualSubroom' => $actualRoom, 'children' => $children, 'iconFiles' => $iconFiles]);  
         } else {
             return redirect('/');
         }
