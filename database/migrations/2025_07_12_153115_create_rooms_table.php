@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users');            
-            $table->string('name');
-            $table->string('slug');
+            $table->foreignId('user_id')->nullable()->constrained();            
+            $table->string('name')->unique();
+            $table->text('description')->nullable();
+            $table->string('slug')->unique();
             $table->string('code')->unique()->nullable();
             $table->string('color')->nullable();
-            $table->string('bgColor')->nullable();
-            $table->string('icon_path')->default('0-B/1_066.ICO');
+            $table->string('bg_color')->nullable();
             $table->timestamps();
         });
     }

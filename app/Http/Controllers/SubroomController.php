@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class SubroomController extends Controller
 {
     public function create(Request $request)
-    {
+    {      
         $validated = $request->validate([
             'name' => 'required|string|max:255|min:2',
             'level' => 'required|integer', 
@@ -17,9 +17,19 @@ class SubroomController extends Controller
             'subroom_id' => 'nullable|integer',
         ]);
 
+        // Generate base slug
+        $baseSlug = Str::slug($validated['name']);
+        $slug = $baseSlug;
+        $suffix = 1;
+
+        // Check for existing slugs, and append a short random code if needed
+        while (Subroom::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . strtolower(Str::random(4)); // e.g. "control-room-x8f3"
+        }
+
         Subroom::create([
             'name' => $validated['name'],
-            'slug' => Str::slug('"' . $validated['name'] . '"'),
+            'slug' => $slug,
             'level' => $validated['level'], 
             'room_id' => $validated['room_id'],
             'subroom_id' => $validated['subroom_id'],

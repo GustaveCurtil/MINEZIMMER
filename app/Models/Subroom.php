@@ -22,6 +22,11 @@ class Subroom extends Model
         return $this->belongsTo(Room::class, 'room_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function parent()
     {
         return $this->belongsTo(Subroom::class, 'subroom_id');

@@ -1,73 +1,41 @@
-
 @extends('_layouts.head')
 
-@section('scripts')
-<script src="{{ asset('js/controls.js')}}"></script>
-@endsection
-
 @section('body')
-<body>
-    <header>
-        @auth
-        <p>Welgekomen, {{ $user->name }}</p>            
-        <form action="{{ route('account.logout') }}" method="POST">
-            @csrf
-            <button type="submit">Uitloggen</button>
-        </form>        
-        @endauth
-    </header>
-    <aside>
-        <section id="view">
-            <div id="welkom">
-                <p>Welkom G, </p>
-                <p>Ik weet nog niet wat de bedoeling van deze website is, maar ik probeer het al bouwend vorm te geven snap je? Alsof ik niets beters heb te doen. <//3 Mopje ik vind dit gewoon leuk zeneu</p>
-            </div>
-            <div class="create">
-                <form action="{{ route('room.create')}}" method="POST">
-                    @csrf
-                    <input type="text" name="name" id="name">
-                    <button type="submit">maak ruimte</button>
-                </form>
-            </div>
-            <div class="create">
-                <form action="{{ route('room.create')}}" method="POST">
-                    @csrf
-                    <input type="text" name="name" id="name">
-                    <button type="submit">maak tekst</button>
-                </form>
-            </div>
-            <div class="create">
-                <form action="{{ route('room.create')}}" method="POST">
-                    @csrf
-                    <input type="text" name="name" id="name">
-                    <button type="submit">maak foto</button>
-                </form>
-            </div>
 
-            @foreach ($rooms as $room)
-            <div class="room">
-                <img src="{{ asset('icons/' . $room->icon_path)}}" alt="" srcset="">
-                <h2>{{ $room->name }}</h2>                     
-            </div>
-            
-            @endforeach
-        </section>
-        <section id="controls">
-            Voeg toe: 
-            <button>kamer</button>
-            <button>tekst</button>
-            <button>foto</button>
-        </section>
-    </aside>
-    <main>
+<header>
+    <div>
+        <h1>
+            MINEZIMMER 1.0
+            <svg width="60" height="60" viewBox="0 0 60 60">
+                <path d="M30 0L37.082 22.918H60L41.459 37.082L48.541 60L30 45.8359L11.459 60L18.541 37.082L0 22.918H22.918L30 0Z" fill="black"/>
+            </svg>
+        </h1>
+    </div>
+    @auth
+        <form action="{{ route('account.logout') }}" method="POST">
+        @csrf
+        <button type="submit">{{ $user->name }} Uitloggen</button>
+    </form> 
+    @endauth
+</header>
+<main>
+    <section id="content">
         @foreach ($rooms as $room)
-        <div class="weergave" style="color: {{ $room->color }}; background-color: {{ $room->bgColor }}">
-            <img src="{{ asset('icons/' . $room->icon_path)}}" alt="" srcset="">
-            <div>
-                <a href="{{ url('/' . $room->id . '-' . $room->slug) }}" style="color: {{ $room->color }};">{{ $room->name }}</a>
-            </div>
-        </div>             
-        @endforeach  
-    </main> 
-</body>
+        <p>
+            <svg width="60" height="60" viewBox="0 0 60 60">
+                <path d="M60 60H0V26L30 0L60 26V60Z" fill="white"/>
+            </svg>
+            <a href="{{ url('/' . $room->slug)}}">{{$room->name}}</a>
+        </p>
+        @endforeach
+    </section>
+</main>
+<footer>
+    <form action="{{ route('room.create')}}" method="POST">
+        @csrf
+        <input type="text" name="name" id="name">
+        <button type="submit">maak Zimmer</button>
+    </form>
+</footer>
+
 @endsection

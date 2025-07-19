@@ -1,165 +1,49 @@
-*, html {padding: 0; margin: 0; box-sizing: border-box;}
-
+/* CSS DEFAULT SETTINGS */
+*, html {padding: 0; margin: 0; box-sizing: border-box; }
+html {font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; }
 :root {
-    --height-header: 2.8rem; 
-    --width-controls: 600px;
+    --gap-small: 0.6rem;
+    --gap-big: 1.8rem;
+    --height-lines: 1.7rem;
+    --height-header: calc(var(--height-lines) + 2 * var(--gap-small));
+    --height-footer: 3.3rem;
+    --width-max: 400px;
     --border: 1px solid rgb(0, 0, 0);
     --kleur-achtergrond: rgb(255, 159, 159);
+    --font-display: 'Courier New', Courier, monospace;;
 }
 
-body {
-    overflow: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    height: 100svh;
-    width: 100vw;
-    background-color: var(--kleur-achtergrond);
-}
+/* FORMALITIES HOLY GRAIL */
+body { overflow: hidden; height: 100svh; width: 100vw; background-color: var(--kleur-achtergrond); background-image: url('/media/Twinkling_Stars.gif');}
+header { width: 100%; height: var(--height-header); padding: var(--gap-small); display: flex; align-items: center; justify-content: space-between; }
+main { width: 100%; height: calc(100svh - var(--height-header) - var(--height-footer)); background-image: url('/media/Twinkling_Stars.gif'); padding: var(--gap-small); overflow-y: auto;}
+footer { width: 100%; height: var(--height-footer); background-color: rgb(238, 130, 209); padding: 0 var(--gap-small); display: flex; align-items: center; justify-content: center; }
 
-header {
-    width: var(--width-controls);
-    height: calc(var(--height-header));
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: var(--border);
-}
+/* HEADER */ 
+header { background-color: yellow;}
+header h1 { display: inline-flex; align-items: center; font-size: x-large;}
+header svg { width: 1.2rem; height: 1.2rem; margin: 0 var(--gap-small);}
 
+/* FORMALITIES FORM */
+main#login form>button{ width: 100%; max-width: var(--width-max); }
+input, button { padding: 0 var(--gap-small); }
 
-main:not(#aanmelden main) {
-    width: calc(100% - var(--width-controls));
-    height: calc(100svh);
-    background-image: url('/media/Twinkling_Stars.gif');
-    column-width: 100px;
-    column-gap: 1rem;
-    padding: 1rem;
-}
+/* LOGIN AREA */
+main#login { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+main#login section {flex-direction: column; width: 100%; max-width: var(--width-max);}
+main#login section:not(:last-of-type) { margin-bottom: var(--gap-big); }
+main#login form { display: flex; width: 100%; max-width: var(--width-max); flex-direction: column; margin-top: var(--gap-small);}
+main#login form > *:not(button) { margin-bottom: var(--gap-small); }
+main#login input[type="checkbox"] { margin-right: var(--gap-small); }
 
-aside {
-    width: var(--width-controls);
-    height: calc(100svh - var(--height-header));
-    max-height: calc(100svh - var(--height-header));
-    border-right: var(--border);
-}
+/* MAIN */
+main section { margin-bottom: var(--gap-small); padding: var(--gap-small) 0;}
+main section:not(#description) { display: flex; flex-wrap: wrap; align-content: flex-start; }
+main section:not(#tree) {font-family: var(--font-display);}
+main *:not(button, input) {color: white; }
+main section#content p { line-height: var(--height-lines); display: inline-flex; flex-wrap: wrap; align-items: center;}
+main section#content p a { padding-right: var(--gap-big); padding-left: var(--gap-small); }
+main section#content p svg { height: 1rem; width: 1rem;}
 
-#control-panel {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-#tree-structure {
-    display: inline-flex;
-    align-items: center;
-}
-
-#tree-structure h2 {
-        font-size: 1rem;
-}
-
-#tree-structure img {
-    width: 1rem;
-}
-
-#icons {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-#icons img, img.icon {
-    aspect-ratio: 1/1;
-    width: 32px;
-}
-
-#iconSelector {
-    width: 100%;
-    height: calc(100svh - 3 * var(--height-header));
-    display: flex;
-    flex-direction: column;
-}
-
-#iconSelector div {
-    height: 100%;
-    width: 100%;
-    overflow-y: auto;
-    display: flex;
-    flex-wrap: wrap;
-    line-height: 0;
-}
-
-#iconSelector input[type="radio"] {
-    display: none;
-}
-
-#iconSelector label {
-    display: inline-block;
-     cursor: pointer;
-     aspect-ratio: 1/1;
-}
-
-#iconSelector input[type="radio"]:checked + img {
-    border: 4px solid #ff0000;
-}
-
-.weergave {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-    break-inside: avoid;
-}
- 
-.weergave div {
-    background-color: rgba(255, 255, 255, 0.554);
-}
-
-.weergave:hover {
-    border: 4px solid #ff0000;
-}
-
-.weergave.actief {
-    border: 4px solid #ff0000;
-}
-
-.paneel:not(.actief) {
-    display: none;
-}
-
-.paneel {
-    height: calc(100svh - 2 * var(--height-header));
-    max-height: calc(100svh - 2 * var(--height-header));
-}
-
-input, button {
-    background-color: white;
-    border: var(--border);
-    height: var(--height-header);
-    padding: 0 1rem;
-}
-
-button.actief {
-    background-color: var(--kleur-achtergrond);
-}
-
-form {line-height: 0;}
-
-aside #view {
-    width: 100%;
-    height: calc(100% - var(--height-header));
-}
-
-aside #view>div:not(.actief) {
-    display: none;
-}
-
-#controls {
-    width: 100%;
-    height: var(--height-header);
-    display: flex;
-    border-top: var(--border);
-        align-items: center;
-}
+/* FOOTER */
+footer form { display: inline-flex; width: 100%; justify-content: center; }

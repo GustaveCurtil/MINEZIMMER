@@ -12,15 +12,24 @@ class RoomController extends Controller
     public function create(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255|min:2',
+            'name' => 'required|string|max:255|min:2|unique:rooms,name',
         ]);
 
         $user = Auth::user();
 
+        /* makes sure the slugs are unique as well */
+        $baseSlug = Str::slug($validated['name']);
+        $slug = $baseSlug;
+        $counter = 1;
+        while (Room::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . $counter;
+            $counter++;
+        }
+
         Room::create([
             'user_id' => $user->id,
             'name' => $validated['name'],
-            'slug' => Str::slug('"' . $validated['name'] . '"'),
+            'slug' => Str::slug($validated['name']),
         ]);
 
         return redirect()->back();
