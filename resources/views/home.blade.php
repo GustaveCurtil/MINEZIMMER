@@ -3,6 +3,9 @@
 @section('main')
 
 <main>
+    <section>
+        <p>Welkom {{$user->name}}</p>
+    </section>
     <section id="content">
         <div>
             @foreach ($rooms as $room)
@@ -11,7 +14,6 @@
                     <path d="M60 60H0V26L30 0L60 26V60Z" fill="white"/>
                 </svg>
                 <a href="{{ url('/' . $room->slug)}}">{{$room->name}}</a> 
-                <span>door {{$room->user->name}}</span>
             </div>
             @endforeach
         </div>
@@ -22,7 +24,7 @@
     <form action="{{ route('room.create')}}" method="POST" class="one-liner">
         @csrf
         <input type="text" name="name" id="name">
-        <button type="submit">maak Zimmer</button>
+        <button type="submit">Zimmer machen</button>
     </form>
 </footer>
 

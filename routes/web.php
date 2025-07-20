@@ -20,6 +20,7 @@ Route::post('/maak-zimmer', [RoomController::class, 'create'])->name('room.creat
 // Route::post('/veranderpictogram', [RoomController::class, 'changeIcon'])->name('room.changeIcon');
 
 Route::post('/maak-zimmerke', [SubroomController::class, 'create'])->name('subroom.create');
+Route::post('/beschrijving-opslaan', [SubroomController::class, 'description'])->name('subroom.description');
 // Route::post('/subnaamwijzigen', [SubroomController::class, 'editName'])->name('subroom.editName');
 // Route::post('/subkleuraanpassen', [SubroomController::class, 'customizeColor'])->name('subroom.customizeColor');
 // Route::post('/verandersubpictogram', [SubroomController::class, 'changeIcon'])->name('subroom.changeIcon');

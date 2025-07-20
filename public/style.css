@@ -10,27 +10,33 @@ html {font-family: 'Courier New', Courier, monospace; color: white; }
     --height-header: calc(var(--height-line) + 2 * var(--gap-small));
     --height-footer: calc(var(--height-field) + 2 * var(--gap-small));
     --width-max: 400px;
-    --border: 1px solid rgb(0, 0, 0);
-    --kleur-achtergrond: rgb(0, 0, 0);
+    --color-achtergrond: rgb(0, 0, 0);
+    --color-link: rgb(67, 255, 54);
+    --color-contrast: black;
+    --color-tekst: white;
+    --border: 1px solid var(--color-tekst);
     --font-display: 'Courier New', Courier, monospace;
 }
 
 /* ...tags */
 h1, h2, h3, h4 { line-height: var(--height-line); color: rgb(255, 255, 255); display: inline-block; }
-a { color: red;}
-a:hover { color: white; background-color: red;}}
+a { color: var(--color-link);}
+a:hover { color: var(--color-contrast); background-color: var(--color-link);}
 
 /* ...forms */
 input { height: var(--height-field); border: var(--border); border-radius: 0; background-color: white; font-family: var(--font-display);}
 label {height: var(--height-field); display: inline-flex; align-items: center;}
 input[type="checkbox"] { height: var(--height-field); width: var(--height-field); cursor: pointer; }
-button { height: var(--height-field); text-decoration: underline; border: var(--border); border-color: white; border-radius: 0; color: white; background-color: transparent; font-family: var(--font-display);}
-button:hover {color: black; background-color: white;}
+button { height: var(--height-field); text-decoration: underline; border: var(--border); border-radius: 0; color: white; background-color: transparent; font-family: var(--font-display);}
+button:hover {color: var(--color-contrast); background-color: white;}
 form.one-liner { display: flex;}
 form.one-liner>input { flex-grow: 1;}
+textarea { width: 100%; height: var(--height-field); resize: none; overflow: hidden; padding: var(--gap-small); font-size: 1rem; font-family: var(--font-display); line-height: var(--height-line); background-color: transparent; color: white; border-color: white;}
+*::placeholder { color: var(--color-tekst); }
+form.seeming button {display: none;}
 
 /* FORMALITIES HOLY GRAIL */
-body { overflow: hidden; height: 100svh; width: 100vw; background-color: var(--kleur-achtergrond); background-image: url('/media/Twinkling_Stars.gif');}
+body { overflow: hidden; height: 100svh; width: 100vw; background-color: var(--color-achtergrond); background-image: url('/media/Twinkling_Stars.gif');}
 header { width: 100%; height: var(--height-header); padding: var(--gap-small); display: flex; align-items: center; justify-content: space-between; }
 main { width: 100%; height: calc(100svh - var(--height-header) - var(--height-footer)); padding: var(--gap-small); overflow-y: auto;}
 footer { width: 100%; height: var(--height-footer); padding: 0 var(--gap-small); display: flex; align-items: center; justify-content: center; }
@@ -62,7 +68,6 @@ main section#content>div>div svg { height: 1rem; width: 1rem;}
 main section#description form {
     width: 100%;
 }
-main section#description textarea {width: 100%; height: auto; resize: none; color: black; padding: var(--gap-small);}
 
 /* FOOTER */
 footer form { display: inline-flex; width: 100%; justify-content: center; }

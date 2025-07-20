@@ -1,5 +1,9 @@
 @extends('_layouts.head')
 
+@section('scripts')
+<script src="{{asset('js/textarea.js')}}" defer></script>
+@endsection
+
 @section('main')
 
 <main>
@@ -12,28 +16,22 @@
             @endforeach
             <p>&nbsp;> {{ $currentRoom->name }}</p>
         </div>
-
         @else
         <p><b>{{ $room->name }}</b></p>
         @endif
     </section>
 
-    @if ($currentRoom->description)
     <section id="description">
-        @if(isset($currentRoom->id) && $currentRoom->user->id === $user->id)
-        <form method="post">
-            <textarea name="description" id="description">
-                {{ $currentRoom->description }}
-            </textarea>
-            <button type="submit">beschrijving opslaan</button>
+        <form method="post" class="seeming" action="{{ route('subroom.description') }}">
+            @csrf
+            <textarea name="description" id="description" placeholder="Voeg beschrijving toe">{{ $currentRoom->description }}</textarea>
+            <input type="hidden" name="room_id" value="{{ $currentRoom->id }}">
+            @if (($currentRoom !== $room))
+            <input type="hidden" name="subroom_id" value="{{ $currentRoom->id }}">
+            @endif
+            <button type="submit" class="hide">beschrijving opslaan</button>
         </form>
-        @else
-        <p>
-        {{ $currentRoom->description }}
-        </p>
-        @endif
     </section>
-    @endif
 
     <section id="content">
         <div>
@@ -54,9 +52,9 @@
         @csrf
         <input type="text" name="name" id="name">
         <input type="hidden" name="level" @if($currentRoom !== $room) value="{{ $currentRoom->level + 1 }}" @else value="1" @endif>
-        <input type="hidden" name="room_id" value="{{ $room->id }}" >
+        <input type="hidden" name="room_id" value="{{ $room->id }}">
         <input type="hidden" name="subroom_id" @if($currentRoom !== $room) value="{{ $currentRoom->id }}" @endif >
-        <button type="submit">maak zimmerke</button>
+        <button type="submit">Zimmerke machen</button>
     </form>
 </footer>
 

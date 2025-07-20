@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use App\Models\Subroom;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -55,15 +56,24 @@ class SubroomController extends Controller
         return redirect()->back();
     }
 
-    public function changeIcon(Request $request) 
-    {
-        $subroom = Subroom::where('id', $request->id)->firstOrFail();
+    public function description(Request $request)
+    {      
+        $validated = $request->validate([
+            'description' => 'nullable|string|min:2',
+            'room_id' => 'required|integer',
+            'subroom_id' => 'nullable|integer',
+        ]);
+
+        $subroom = Subroom::where('id', $request->subroom_id)->firstOrFail();
 
         if ($subroom) {
-            $subroom->icon_path = $request->icon_path;
-            $subroom->update();        
+            $subroom->description = $validated['description'];
+            $subroom->update(); 
+        } else {
+            $room = Room::where('id', $request->room->id)->firstOrFail();
+            $room->description = $validated['description'];
+            $room->update(); 
         }
-
         return redirect()->back();
     }
 }
