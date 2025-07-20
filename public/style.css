@@ -21,8 +21,9 @@ footer { width: 100%; height: var(--height-footer); background-color: rgb(238, 1
 
 /* HEADER */ 
 header { background-color: yellow;}
-header h1 { display: inline-flex; align-items: center; font-size: x-large;}
-header svg { width: 1.2rem; height: 1.2rem; margin: 0 var(--gap-small);}
+header div { width: 80%;}
+header h1 { display: inline-flex; align-items: center; flex-wrap: nowrap; font-size: x-large;}
+header svg { width: 1.0rem; height: 1.0rem; margin: 0 var(--gap-small);}
 
 /* FORMALITIES FORM */
 main#login form>button{ width: 100%; max-width: var(--width-max); }
@@ -37,13 +38,21 @@ main#login form > *:not(button) { margin-bottom: var(--gap-small); }
 main#login input[type="checkbox"] { margin-right: var(--gap-small); }
 
 /* MAIN */
-main section { margin-bottom: var(--gap-small); padding: var(--gap-small) 0;}
-main section:not(#description) { display: flex; flex-wrap: wrap; align-content: flex-start; }
-main section:not(#tree) {font-family: var(--font-display);}
+main section { padding: var(--gap-small) 0;}
+main section {font-family: var(--font-display);}
 main *:not(button, input) {color: white; }
-main section#content p { line-height: var(--height-lines); display: inline-flex; flex-wrap: wrap; align-items: center;}
-main section#content p a { padding-right: var(--gap-big); padding-left: var(--gap-small); }
-main section#content p svg { height: 1rem; width: 1rem;}
+
+main section#tree div {display: flex; flex-wrap: wrap;}
+
+main section#content>div {display: flex; flex-wrap: wrap;}
+main section#content>div>div { line-height: var(--height-lines); display: inline-flex; flex-wrap: wrap; align-items: center; margin-right: var(--gap-big);}
+main section#content>div>div a { padding: 0 var(--gap-small); }
+main section#content>div>div svg { height: 1rem; width: 1rem;}
+
+main section#description form {
+    width: 100%;
+}
+main section#description textarea {width: 100%; height: auto; resize: none; color: black; padding: var(--gap-small);}
 
 /* FOOTER */
 footer form { display: inline-flex; width: 100%; justify-content: center; }

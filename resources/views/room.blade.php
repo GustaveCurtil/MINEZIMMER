@@ -21,30 +21,48 @@
 <main>
     <section id="tree">
         @if ($currentRoom !== $room)
-        <p><a href="{{ url('/' . $room->slug) }}">{{ $room->name }}</a>&nbsp;</p>
-        @foreach ($currentRoom->parents() as $parent)
-            <p>> <a href="{{ url('/' . $room->slug . '/' . $parent->slug) }}">{{ $parent->name }}</a>&nbsp;</p>
-        @endforeach
-        <p>&nbsp;> {{ $currentRoom->name }}</p>
+        <p><b><a href="{{ url('/' . $room->slug) }}">{{ $room->name }}</a></b></p>
+        <div>
+            @foreach ($currentRoom->parents() as $parent)
+                <p>&nbsp;> <a href="{{ url('/' . $room->slug . '/' . $parent->slug) }}">{{ $parent->name }}</a></p>
+            @endforeach
+            <p>&nbsp;> {{ $currentRoom->name }}:</p>
+        </div>
         @else
-        <p>{{ $room->name }}</p>
+        <p><b>{{ $room->name }}:</b></p>
         @endif
     </section>
+
+    @if ($currentRoom->description)
     <section id="description">
+        @if(isset($currentRoom->id) && $currentRoom->user->id === $user->id)
+        <form method="post">
+            <textarea name="description" id="description">
+                {{ $currentRoom->description }}
+            </textarea>
+            <button type="submit">beschrijving opslaan</button>
+        </form>
+        @else
         <p>
         {{ $currentRoom->description }}
-        {{ $room->description }}
         </p>
+        @endif
     </section>
+    @endif
+
     <section id="content">
-    @foreach ($subrooms as $subroom)
-        <p>
-            <svg width="60" height="60" viewBox="0 0 60 60">
-                <path d="M60 60H0V26L30 0L60 26V60Z" fill="white"/>
-            </svg>
-            <a href="{{ url('/' . $room->slug . '/' . $subroom->slug)}}">{{$subroom->name}}</a>
-        </p>
-    @endforeach
+        <p>Zimmerkes:</p>
+        <div>
+            @foreach ($subrooms as $subroom)
+            <div>
+                <svg width="60" height="60" viewBox="0 0 60 60">
+                    <path d="M60 60H0V26L30 0L60 26V60Z" fill="white"/>
+                </svg>
+                <a href="{{ url('/' . $room->slug . '/' . $subroom->slug)}}">{{$subroom->name}}</a>
+            </div>
+            @endforeach
+        </div>
+        
     </section>
 </main>
 <footer>

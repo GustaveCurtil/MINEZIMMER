@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Subroom extends Model
 {
     protected $fillable = [
+        'user_id',
         'name',
+        'description',
         'slug',
         'level',
         'room_id', 

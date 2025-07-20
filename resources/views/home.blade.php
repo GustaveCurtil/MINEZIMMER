@@ -20,14 +20,18 @@
 </header>
 <main>
     <section id="content">
-        @foreach ($rooms as $room)
-        <p>
-            <svg width="60" height="60" viewBox="0 0 60 60">
-                <path d="M60 60H0V26L30 0L60 26V60Z" fill="white"/>
-            </svg>
-            <a href="{{ url('/' . $room->slug)}}">{{$room->name}}</a>
-        </p>
-        @endforeach
+        <div>
+            @foreach ($rooms as $room)
+            <div>
+                <svg width="60" height="60" viewBox="0 0 60 60">
+                    <path d="M60 60H0V26L30 0L60 26V60Z" fill="white"/>
+                </svg>
+                <a href="{{ url('/' . $room->slug)}}">{{$room->name}}</a> 
+                <span>door {{$room->user->name}}</span>
+            </div>
+            @endforeach
+        </div>
+        
     </section>
 </main>
 <footer>

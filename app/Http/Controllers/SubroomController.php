@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Subroom;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubroomController extends Controller
 {
@@ -16,6 +17,8 @@ class SubroomController extends Controller
             'room_id' => 'required|integer',
             'subroom_id' => 'nullable|integer',
         ]);
+
+        $user = Auth::user();
 
         // Generate base slug
         $baseSlug = Str::slug($validated['name']);
@@ -29,6 +32,7 @@ class SubroomController extends Controller
 
         Subroom::create([
             'name' => $validated['name'],
+            'user_id' => $user->id,
             'slug' => $slug,
             'level' => $validated['level'], 
             'room_id' => $validated['room_id'],
