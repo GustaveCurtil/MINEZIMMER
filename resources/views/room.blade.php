@@ -1,35 +1,20 @@
 @extends('_layouts.head')
 
-@section('body')
+@section('main')
 
-<header>
-    <div>
-        <h1>
-            <a href="{{ url('/') }}">MINEZIMMER 1.0</a>
-            <svg width="60" height="60" viewBox="0 0 60 60">
-                <path d="M30 0L37.082 22.918H60L41.459 37.082L48.541 60L30 45.8359L11.459 60L18.541 37.082L0 22.918H22.918L30 0Z" fill="black"/>
-            </svg>
-        </h1>
-    </div>
-    @auth
-        <form action="{{ route('account.logout') }}" method="POST">
-        @csrf
-        <button type="submit">{{ $user->name }} Uitloggen</button>
-    </form> 
-    @endauth
-</header>
 <main>
     <section id="tree">
         @if ($currentRoom !== $room)
-        <p><b><a href="{{ url('/' . $room->slug) }}">{{ $room->name }}</a></b></p>
         <div>
+            <p><b><a href="{{ url('/' . $room->slug) }}">{{ $room->name }}</a></b></p>
             @foreach ($currentRoom->parents() as $parent)
-                <p>&nbsp;> <a href="{{ url('/' . $room->slug . '/' . $parent->slug) }}">{{ $parent->name }}</a></p>
+            <p>&nbsp;> <a href="{{ url('/' . $room->slug . '/' . $parent->slug) }}">{{ $parent->name }}</a></p>
             @endforeach
-            <p>&nbsp;> {{ $currentRoom->name }}:</p>
+            <p>&nbsp;> {{ $currentRoom->name }}</p>
         </div>
+
         @else
-        <p><b>{{ $room->name }}:</b></p>
+        <p><b>{{ $room->name }}</b></p>
         @endif
     </section>
 
@@ -51,7 +36,6 @@
     @endif
 
     <section id="content">
-        <p>Zimmerkes:</p>
         <div>
             @foreach ($subrooms as $subroom)
             <div>
@@ -66,7 +50,7 @@
     </section>
 </main>
 <footer>
-    <form action="{{ route('subroom.create')}}" method="POST">
+    <form action="{{ route('subroom.create')}}" method="POST" class="one-liner">
         @csrf
         <input type="text" name="name" id="name">
         <input type="hidden" name="level" @if($currentRoom !== $room) value="{{ $currentRoom->level + 1 }}" @else value="1" @endif>

@@ -1,36 +1,47 @@
 /* CSS DEFAULT SETTINGS */
 *, html {padding: 0; margin: 0; box-sizing: border-box; }
-html {font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; }
+html {font-family: 'Courier New', Courier, monospace; color: white; }
 :root {
+    --gap-mini: 0.2rem;
     --gap-small: 0.6rem;
     --gap-big: 1.8rem;
-    --height-lines: 1.7rem;
-    --height-header: calc(var(--height-lines) + 2 * var(--gap-small));
-    --height-footer: 3.3rem;
+    --height-line: 1.6rem;
+    --height-field: 1.4rem;
+    --height-header: calc(var(--height-line) + 2 * var(--gap-small));
+    --height-footer: calc(var(--height-field) + 2 * var(--gap-small));
     --width-max: 400px;
     --border: 1px solid rgb(0, 0, 0);
-    --kleur-achtergrond: rgb(255, 159, 159);
-    --font-display: 'Courier New', Courier, monospace;;
+    --kleur-achtergrond: rgb(0, 0, 0);
+    --font-display: 'Courier New', Courier, monospace;
 }
+
+/* ...tags */
+h1, h2, h3, h4 { line-height: var(--height-line); color: rgb(255, 255, 255); display: inline-block; }
+a { color: red;}
+a:hover { color: white; background-color: red;}}
+
+/* ...forms */
+input { height: var(--height-field); border: var(--border); border-radius: 0; background-color: white; font-family: var(--font-display);}
+label {height: var(--height-field); display: inline-flex; align-items: center;}
+input[type="checkbox"] { height: var(--height-field); width: var(--height-field); cursor: pointer; }
+button { height: var(--height-field); text-decoration: underline; border: var(--border); border-color: white; border-radius: 0; color: white; background-color: transparent; font-family: var(--font-display);}
+button:hover {color: black; background-color: white;}
+form.one-liner { display: flex;}
+form.one-liner>input { flex-grow: 1;}
 
 /* FORMALITIES HOLY GRAIL */
 body { overflow: hidden; height: 100svh; width: 100vw; background-color: var(--kleur-achtergrond); background-image: url('/media/Twinkling_Stars.gif');}
 header { width: 100%; height: var(--height-header); padding: var(--gap-small); display: flex; align-items: center; justify-content: space-between; }
-main { width: 100%; height: calc(100svh - var(--height-header) - var(--height-footer)); background-image: url('/media/Twinkling_Stars.gif'); padding: var(--gap-small); overflow-y: auto;}
-footer { width: 100%; height: var(--height-footer); background-color: rgb(238, 130, 209); padding: 0 var(--gap-small); display: flex; align-items: center; justify-content: center; }
+main { width: 100%; height: calc(100svh - var(--height-header) - var(--height-footer)); padding: var(--gap-small); overflow-y: auto;}
+footer { width: 100%; height: var(--height-footer); padding: 0 var(--gap-small); display: flex; align-items: center; justify-content: center; }
 
-/* HEADER */ 
-header { background-color: yellow;}
-header div { width: 80%;}
-header h1 { display: inline-flex; align-items: center; flex-wrap: nowrap; font-size: x-large;}
-header svg { width: 1.0rem; height: 1.0rem; margin: 0 var(--gap-small);}
 
 /* FORMALITIES FORM */
 main#login form>button{ width: 100%; max-width: var(--width-max); }
-input, button { padding: 0 var(--gap-small); }
+input, button { padding: 0 var(--gap-mini); }
 
 /* LOGIN AREA */
-main#login { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+main#login>div { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100%;}
 main#login section {flex-direction: column; width: 100%; max-width: var(--width-max);}
 main#login section:not(:last-of-type) { margin-bottom: var(--gap-big); }
 main#login form { display: flex; width: 100%; max-width: var(--width-max); flex-direction: column; margin-top: var(--gap-small);}
@@ -40,13 +51,12 @@ main#login input[type="checkbox"] { margin-right: var(--gap-small); }
 /* MAIN */
 main section { padding: var(--gap-small) 0;}
 main section {font-family: var(--font-display);}
-main *:not(button, input) {color: white; }
 
 main section#tree div {display: flex; flex-wrap: wrap;}
 
 main section#content>div {display: flex; flex-wrap: wrap;}
-main section#content>div>div { line-height: var(--height-lines); display: inline-flex; flex-wrap: wrap; align-items: center; margin-right: var(--gap-big);}
-main section#content>div>div a { padding: 0 var(--gap-small); }
+main section#content>div>div { line-height: var(--height-line); display: inline-flex; flex-wrap: wrap; align-items: center; margin-right: var(--gap-big);}
+main section#content>div>div a { margin: 0 var(--gap-small); }
 main section#content>div>div svg { height: 1rem; width: 1rem;}
 
 main section#description form {

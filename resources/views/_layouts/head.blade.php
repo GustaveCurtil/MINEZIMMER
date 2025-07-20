@@ -10,8 +10,23 @@
 </head>
 
 <body>
+    <header>
+        <h1>
+            @if (!request()->routeIs('home'))
+            <a href="{{ route('home') }}">MINEZIMMER</a>
+            @else
+            MINEZIMMER
+            @endif
+        </h1>
+        @auth
+        <form action="{{ route('account.logout') }}" method="POST">
+            @csrf
+            <button type="submit">uitloggen</button>
+        </form> 
+        @endauth
+    </header>
 @auth
-@yield('body')    
+@yield('main')    
 @else
 @include('_partials.register')
 @endauth

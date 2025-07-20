@@ -1,23 +1,7 @@
 @extends('_layouts.head')
 
-@section('body')
+@section('main')
 
-<header>
-    <div>
-        <h1>
-            MINEZIMMER 1.0
-            <svg width="60" height="60" viewBox="0 0 60 60">
-                <path d="M30 0L37.082 22.918H60L41.459 37.082L48.541 60L30 45.8359L11.459 60L18.541 37.082L0 22.918H22.918L30 0Z" fill="black"/>
-            </svg>
-        </h1>
-    </div>
-    @auth
-        <form action="{{ route('account.logout') }}" method="POST">
-        @csrf
-        <button type="submit">{{ $user->name }} Uitloggen</button>
-    </form> 
-    @endauth
-</header>
 <main>
     <section id="content">
         <div>
@@ -35,7 +19,7 @@
     </section>
 </main>
 <footer>
-    <form action="{{ route('room.create')}}" method="POST">
+    <form action="{{ route('room.create')}}" method="POST" class="one-liner">
         @csrf
         <input type="text" name="name" id="name">
         <button type="submit">maak Zimmer</button>

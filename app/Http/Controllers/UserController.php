@@ -12,7 +12,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255|min:2',
+            'name' => 'required|string|max:255|min:2|unique:users,name',
             'password' => 'required|confirmed|min:2',
             'agree' => 'accepted',
         ]);
