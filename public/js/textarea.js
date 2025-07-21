@@ -1,4 +1,5 @@
 function autoResizeTextarea(el) {
+    el.style.height = 'var(--height-field)';
     el.style.height = el.scrollHeight + 'px'; // set to content height
 }
 

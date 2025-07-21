@@ -27,7 +27,7 @@ class SubroomController extends Controller
         $suffix = 1;
 
         // Check for existing slugs, and append a short random code if needed
-        while (Subroom::where('slug', $slug)->exists()) {
+        while (Subroom::where('slug', $slug)->exists()) { //hier zal ik nog iets moeten toevoegen zodat slug != 'etwas-machen'
             $slug = $baseSlug . '-' . strtolower(Str::random(4)); // e.g. "control-room-x8f3"
         }
 
@@ -58,22 +58,25 @@ class SubroomController extends Controller
 
     public function description(Request $request)
     {      
+
         $validated = $request->validate([
             'description' => 'nullable|string|min:2',
             'room_id' => 'required|integer',
             'subroom_id' => 'nullable|integer',
         ]);
-
-        $subroom = Subroom::where('id', $request->subroom_id)->firstOrFail();
-
-        if ($subroom) {
-            $subroom->description = $validated['description'];
-            $subroom->update(); 
+        
+        if ($request->subroom_id) {
+            $subroom = Subroom::where('id', $request->subroom_id)->firstOrFail();
+            if ($subroom) {
+                $subroom->description = $validated['description'];
+                $subroom->update(); 
+            }
         } else {
-            $room = Room::where('id', $request->room->id)->firstOrFail();
+            $room = Room::where('id', $request->room_id)->firstOrFail();
             $room->description = $validated['description'];
             $room->update(); 
         }
+
         return redirect()->back();
     }
 }

@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained();            
-            $table->string('name')->unique();
+            $table->string('name');
             $table->text('description')->nullable();
             $table->string('slug')->unique();
+            $table->boolean('open')->default(true);
             $table->string('code')->unique()->nullable();
+            $table->boolean('read_only')->default(false);
             $table->string('color')->nullable();
             $table->string('bg_color')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

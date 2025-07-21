@@ -19,10 +19,11 @@
             @endif
         </h1>
         @auth
-        <form action="{{ route('account.logout') }}" method="POST">
-            @csrf
-            <button type="submit">uitloggen</button>
-        </form> 
+        @if (request()->routeIs('settings'))
+        <p style="font-size: 0.9rem">{{ $user->name }}</p>
+        @else 
+        <a href="{{ route('settings') }}">{{$user->name}}</a>
+        @endif
         @endauth
     </header>
 @auth

@@ -1,4 +1,4 @@
-<main id="login">
+<main class="middle">
     <div>
         <section>
             <h2>Inloggen</h2>
@@ -22,3 +22,6 @@
         </section>
     </div>
 </main>
+<footer>
+    <p>websheit gemacht dür <a href="https://kurtgustil.be/">kurt<b>gust</b>il</a></p>
+</footer>

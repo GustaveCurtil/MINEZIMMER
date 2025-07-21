@@ -24,8 +24,8 @@
     <section id="description">
         <form method="post" class="seeming" action="{{ route('subroom.description') }}">
             @csrf
-            <textarea name="description" id="description" placeholder="Voeg beschrijving toe">{{ $currentRoom->description }}</textarea>
-            <input type="hidden" name="room_id" value="{{ $currentRoom->id }}">
+            <textarea name="description" id="description" placeholder="Voeg beschrijving toe">{{ $currentRoom->description ?? '' }}</textarea>
+            <input type="hidden" name="room_id" value="{{ $room->id }}">
             @if (($currentRoom !== $room))
             <input type="hidden" name="subroom_id" value="{{ $currentRoom->id }}">
             @endif
@@ -48,14 +48,7 @@
     </section>
 </main>
 <footer>
-    <form action="{{ route('subroom.create')}}" method="POST" class="one-liner">
-        @csrf
-        <input type="text" name="name" id="name">
-        <input type="hidden" name="level" @if($currentRoom !== $room) value="{{ $currentRoom->level + 1 }}" @else value="1" @endif>
-        <input type="hidden" name="room_id" value="{{ $room->id }}">
-        <input type="hidden" name="subroom_id" @if($currentRoom !== $room) value="{{ $currentRoom->id }}" @endif >
-        <button type="submit">Zimmerke machen</button>
-    </form>
+    <a href="{{  url('/etwas-machen') }}"><button>Etwas machen</button></a>
 </footer>
 
 @endsection

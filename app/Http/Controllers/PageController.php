@@ -16,6 +16,21 @@ class PageController extends Controller
         return view('home', ['user' => $user, 'rooms' => $rooms]);
     }
 
+    public function settings() {
+        $user = Auth::user();
+        return view('settings', ['user' => $user]);
+    }
+
+    public function workbenchRoom() {
+        $user = Auth::user();
+        return view('workbench_room', ['user' => $user]);
+    }
+
+    public function workbench() {
+        $user = Auth::user();
+        return view('workbench', ['user' => $user]);
+    }
+
     public function enterRoom($slug, $subSlug = null) {
         $user = Auth::user();
         $room = Room::where('slug', $slug)->firstOrFail();

@@ -3,9 +3,6 @@
 @section('main')
 
 <main>
-    <section>
-        <p>Welkom {{$user->name}}</p>
-    </section>
     <section id="content">
         <div>
             @foreach ($rooms as $room)
@@ -21,11 +18,7 @@
     </section>
 </main>
 <footer>
-    <form action="{{ route('room.create')}}" method="POST" class="one-liner">
-        @csrf
-        <input type="text" name="name" id="name">
-        <button type="submit">Zimmer machen</button>
-    </form>
+    <a href="{{  url('/zimmer-machen') }}"><button>Zimmer machen</button></a>
 </footer>
 
 @endsection

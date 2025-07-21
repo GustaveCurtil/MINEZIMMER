@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubroomController;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/inshtellungen', [PageController::class, 'settings'])->name('settings');
+Route::get('/zimmer-machen', [PageController::class, 'workbench'])->middleware('auth');
 Route::get('/{slug}', [PageController::class, 'enterRoom'])->middleware('auth');
 Route::get('/{slug}/{subSlug}', [PageController::class, 'enterRoom'])->middleware('auth');
 
