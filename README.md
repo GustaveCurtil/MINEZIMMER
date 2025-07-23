@@ -24,13 +24,15 @@ Graag zoiets dat er veel creatieve mogelijkheden zijn.
 - achtergrond en voorgrondkleur aanpassen
 - enkel eigenaar kan dingen deleten
 - zimmmer gaat op 'inactief' na x aantal dagen inactief en kan dan enkel nog ge-activeerd worden als de eigenaar er terug iets in veranderd ofzo.
+- code gesloten kamer: code zelf bepalen? nee. "voor de veiligheid van anderen en jezelf: genereer een nieuwe code als iedereen er in zit die je wilde"
+- toch zo iets met conneczies om mensen in-app uit te nodigen?
 
 ## Toe Does
 
 ### Binnenkort
 
 - niet inzoomen bij focus input
-- 
+- ontwerp voor instellingen room
 
 ### Uitstellen
 

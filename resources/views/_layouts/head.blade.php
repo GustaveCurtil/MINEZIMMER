@@ -9,28 +9,10 @@
     <title>MINEZIMMER</title>
 </head>
 
-<body>
-    <header>
-        <h1>
-            @if (!request()->routeIs('home'))
-            <a href="{{ route('home') }}">MINEZIMMER</a>
-            @else
-            MINEZIMMER
-            @endif
-        </h1>
-        @auth
-        @if (request()->routeIs('settings'))
-        <p style="font-size: 0.9rem">{{ $user->name }}</p>
-        @else 
-        <a href="{{ route('settings') }}">{{$user->name}}</a>
-        @endif
-        @endauth
-    </header>
 @auth
-@yield('main')    
+@yield('body')    
 @else
 @include('_partials.register')
 @endauth
-    
-</body>
+
 </html>

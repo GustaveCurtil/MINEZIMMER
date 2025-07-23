@@ -9,11 +9,13 @@ class Room extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'description',
+        'write_read',
         'slug',
         'code',
         'color',
         'bgColor', 
-        'icon_path'
+        'active'
     ];
 
     public function user()

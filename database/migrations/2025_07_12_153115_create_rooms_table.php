@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->boolean('open')->default(true);
             $table->string('code')->unique()->nullable();
-            $table->boolean('read_only')->default(false);
+            $table->boolean('write_read')->default(true);
             $table->string('color')->nullable();
             $table->string('bg_color')->nullable();
             $table->boolean('active')->default(true);

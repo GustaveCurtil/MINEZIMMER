@@ -13,25 +13,15 @@ class PageController extends Controller
     public function home() {
         $user = Auth::user();
         $rooms = Room::all();
-        return view('home', ['user' => $user, 'rooms' => $rooms]);
+        return view('00_home', ['user' => $user, 'rooms' => $rooms]);
     }
 
     public function settings() {
         $user = Auth::user();
-        return view('settings', ['user' => $user]);
+        return view('01_settings', ['user' => $user]);
     }
 
-    public function workbenchRoom() {
-        $user = Auth::user();
-        return view('workbench_room', ['user' => $user]);
-    }
-
-    public function workbench() {
-        $user = Auth::user();
-        return view('workbench', ['user' => $user]);
-    }
-
-    public function enterRoom($slug, $subSlug = null) {
+    public function room($slug, $subSlug = null) {
         $user = Auth::user();
         $room = Room::where('slug', $slug)->firstOrFail();
 
@@ -48,11 +38,63 @@ class PageController extends Controller
         $subrooms = Subroom::where('room_id', $room->id)->where('subroom_id', $subroomId)->where('level', $currentLevel + 1)->get();
 
         if ($room) {
-            return view('room', ['user' => $user, 'room' => $room, 'currentRoom' => $currentRoom, 'subrooms' => $subrooms]);  
+            return view('10_room', ['user' => $user, 'room' => $room, 'currentRoom' => $currentRoom, 'subrooms' => $subrooms]);  
         } else {
             return redirect('/');
         }
         
+    }
+
+    public function cudRoom($slug = null) {
+        $user = Auth::user();
+        $room = null;
+
+        if ($slug) {
+            $room = Room::where('slug', $slug)->firstOrFail(); 
+        }
+
+        return view('20_cud_room', [
+            'user' => $user,
+            'room' => $room,
+        ]);
+    }
+
+    public function createSubroom($slug, $subSlug = null , $id = null) {
+        $user = Auth::user();
+        $room = Room::where('slug', $slug)->firstOrFail();
+        $subroom = null;
+        $update = false;
+
+        if ($id) {
+            $subroom = Subroom::find($id); 
+        }
+
+        return view('21_cud_subroom', [
+            'user' => $user,
+            'room' => $room,
+            'subroom' => $subroom,
+            'update' => $update,
+        ]);  
+
+    }
+
+    public function updateSubroom($slug, $subSlug = null , $id = null) {
+        $user = Auth::user();
+        $room = Room::where('slug', $slug)->firstOrFail();
+        $subroom = null;
+        $update = true;
+
+        if ($id) {
+            $subroom = Subroom::find($id); 
+        }
+
+        return view('21_cud_subroom', [
+            'user' => $user,
+            'room' => $room,
+            'subroom' => $subroom,
+            'update' => $update,
+        ]);  
+
     }
 
     // public function subroom($id, $slug, $subId, $subSlug)
