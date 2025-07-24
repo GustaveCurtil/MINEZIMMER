@@ -33,7 +33,7 @@
         </section>
     </main>
     <footer>
-        <a href="{{  url('/machen') }}"><button>Zimmer machen</button></a>
+        <a href="{{  url('/machen') }}"><button>+</button></a>
     </footer>
 </body>
 

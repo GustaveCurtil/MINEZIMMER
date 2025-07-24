@@ -20,11 +20,11 @@
         <section id="tree">
             @if ($currentRoom !== $room)
             <div>
-                <p>> <b><a href="{{ url('/' . $room->slug) }}">{{ $room->name }}</a></b></p>
+                <p>> <b><a href="{{ url('/' . $room->slug) }}">{{ $room->name }}</a></b>&nbsp;</p>
                 @foreach ($currentRoom->parents() as $parent)
-                <p>&nbsp;> <a href="{{ url('/' . $room->slug . '/' . $parent->slug) }}">{{ $parent->name }}</a></p>
+                <p>> <a href="{{ url('/' . $room->slug . '/' . $parent->slug) }}">{{ $parent->name }}</a>&nbsp;</p>
                 @endforeach
-                <p>&nbsp;> {{ $currentRoom->name }}</p>
+                <p>> <b>{{ $currentRoom->name }}</b></p>
             </div>
             @else
             <p>> <b>{{ $room->name }}</b></p>
@@ -32,7 +32,7 @@
         </section>
 
         <section id="description">
-            <p>{{ $currentRoom->description ?? '' }}</p>
+            <p>{!! nl2br(e($currentRoom->description ?? '')) !!}</p>
         </section>
 
         <section id="content">
@@ -50,9 +50,9 @@
     </main>
     <footer>
         @if (($currentRoom === $room))
-        <a href="{{  url('/' . $room->slug . '/machen') }}"><button>Etwas machen</button></a>
+        <a href="{{  url('/' . $room->slug . '/machen') }}"><button>+</button></a>
         @else
-        <a href="{{  url('/' . $room->slug . '/' . $currentRoom->slug . '/' . $currentRoom->id . '/machen') }}"><button>Etwas machen</button></a>
+        <a href="{{  url('/' . $room->slug . '/' . $currentRoom->slug . '/' . $currentRoom->id . '/machen') }}"><button>+</button></a>
         @endif
     </footer>
 </body>

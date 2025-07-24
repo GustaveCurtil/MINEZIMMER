@@ -7,7 +7,7 @@
     --height-line: 1.6rem;
     --height-field: 1.4rem;
     --height-header: calc(var(--height-line) + 2 * var(--gap-small));
-    --height-footer: calc(var(--height-field) + 2 * var(--gap-small));
+    --height-footer: calc(2 * var(--height-field) + 2 * var(--gap-small));
     --width-max: 600px;
     --color-achtergrond: rgb(0, 0, 0);
     --color-link: rgb(67, 255, 54);
@@ -28,22 +28,22 @@ a:active { color: rgb(17, 251, 0);}
 /* ...forms */
 form { display: flex; width: 100%; flex-direction: column; }
 fieldset { margin-bottom: var(--gap-big); }
-input { height: var(--height-field); border: var(--border); border-radius: 0; background-color: white; font-family: var(--font-display); padding: 0 var(--gap-mini);}
+input { height: var(--height-field); border: var(--border); border-radius: 0; background-color: var(--color-tekst); font-family: var(--font-display); padding: 0 var(--gap-mini);}
 input::placeholder { color: var(--color-contrast); }
 label {height: var(--height-field); display: inline-flex; align-items: center;}
 input[type="checkbox"] { height: var(--height-field); width: var(--height-field); cursor: pointer; }
-button { height: var(--height-field); text-decoration: underline; border: var(--border); border-radius: 0; color: white; background-color: transparent; font-family: var(--font-display); padding: 0 var(--gap-mini);}
-button:hover {color: var(--color-contrast); background-color: white;}
+button { height: var(--height-field); text-decoration: underline; border: var(--border); border-radius: 0; color: var(--color-tekst); background-color: transparent; font-family: var(--font-display); padding: 0 var(--gap-mini);}
+button:hover {color: var(--color-contrast); background-color: var(--color-tekst);}
 form.one-liner { display: flex;}
 form.one-liner>input { flex-grow: 1;}
-textarea { width: 100%; height: var(--height-field); resize: none; overflow: hidden; padding: var(--gap-mini); font-family: var(--font-display); line-height: var(--height-line); border-color: white;}
+textarea { width: 100%; height: var(--height-field); resize: none; overflow: hidden; padding: var(--gap-mini); font-family: var(--font-display); line-height: var(--height-line); border-color: var(--color-tekst);}
 textarea::placeholder { color: var(--color-contrast); }
 
 /* FORMALITIES HOLY GRAIL */
 body { overflow: hidden; height: 100svh; width: 100vw; background-color: var(--color-achtergrond); background-image: url('/media/Twinkling_Stars.gif');}
-header { width: 100%; height: var(--height-header); padding: var(--gap-small); display: flex; align-items: center; justify-content: space-between; }
-main { width: 100%; height: calc(100svh - var(--height-header) - var(--height-footer)); padding: var(--gap-small); overflow-y: auto;}
-footer { width: 100%; height: var(--height-footer); padding: 0 var(--gap-small); display: flex; align-items: center; justify-content: center; font-size: 0.9rem;}
+header { position: absolute; top: 0; width: 100%; height: var(--height-header); padding: var(--gap-small); display: flex; align-items: center; justify-content: space-between; }
+main { width: 100%; height: 100svh; padding: var(--gap-small); overflow-y: auto; padding-top: calc(var(--gap-small) + var(--height-header)); padding-bottom: calc(var(--gap-small) + var(--height-footer));}
+footer { position: absolute; bottom: 0; width: 100%; height: var(--height-footer); padding: 0 var(--gap-small); display: flex; align-items: center; justify-content: center; font-size: 0.9rem;}
 section { width: 100%;}
 section.center { width: 100%; max-width: var(--width-max); margin: 0 auto;}
 section:not(:last-of-type) { margin-bottom: var(--gap-small);}
@@ -65,5 +65,6 @@ main section#content>div>div a>span { text-decoration: none; padding-right: var(
 main section#content>div>div svg { min-height: calc(var(--height-line) / 2); min-width: calc(var(--height-line) / 2); height: calc(var(--height-line) / 2); width: calc(var(--height-line) / 2);}
 
 /* FOOTER */
-footer form { display: inline-flex; width: 100%; justify-content: center; }
+footer>a:hover { background-color:transparent;}
+footer>a>button { height: calc(var(--height-footer) - 2 * var(--gap-small)); aspect-ratio: 1/1; border-radius: 50%; text-decoration: none; color: var(--color-link); border-color: var(--color-link); font-size: var(--height-line); box-shadow: 0px 0px 16px 0px rgba(255, 255, 255, 0.859);}
 
