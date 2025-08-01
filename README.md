@@ -4,7 +4,7 @@ Moto: er is niet echt een uitgesproken doel of richting waar dit project naar to
 
 ## Concept 🎨
 
-Graag zoiets dat er veel creatieve mogelijkheden zijn.
+Graag features die tot veel creatieve mogelijkheden leiden.
 
 ### Content per kamer
 
@@ -39,6 +39,7 @@ Graag zoiets dat er veel creatieve mogelijkheden zijn.
 - kamer kunnen verwijderen (enkel hoofdeigenaar Room)
 - lange user->name moet puntjes krijgen zodat he... 
 - ontwerp fine-tunen
+- logo's ontwerpen voor verschillende soort kamers/meubels
 
 ### Uitstellen
 

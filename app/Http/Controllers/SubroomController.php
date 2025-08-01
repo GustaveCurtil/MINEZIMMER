@@ -25,22 +25,7 @@ class SubroomController extends Controller
         $room = Room::where('id', $validated['room_id'])->firstOrFail();
         $subroom = $validated['subroom_id'] ? Subroom::findOrFail($validated['subroom_id']) : null;
 
-        // Generate base slug
-        $baseSlug = Str::slug($validated['name']);
-        $slug = $baseSlug;
-        $counter = 1;
-        if (!empty($validated['subroom_id'])) {
-            while (Subroom::where('slug', $slug)
-                ->exists()) {
-                $slug = $baseSlug . $counter++;
-            }
-        } else {
-            while (Subroom::where('slug', $slug)
-                ->exists()) {
-                $slug = $baseSlug . $counter++;
-            }
-        }
-
+        // Generate base name and slug
         $baseName = $validated['name'];
         $name = $baseName;
         $subroomId = $subroom->id ?? null;
@@ -50,6 +35,23 @@ class SubroomController extends Controller
             ->where('subroom_id', $subroomId)
             ->exists()) {
             $name = $baseName . $counter++;
+        }        
+        
+        $baseSlug = Str::slug($name);
+        $slug = $baseSlug;
+        $counter = 2;
+        if (!empty($validated['subroom_id'])) {
+            while (Subroom::where('slug', $slug)
+                ->where('room_id', $room->id)
+                ->exists()) {
+                $slug = $baseSlug . $counter++;
+            }
+        } else {
+            while (Subroom::where('slug', $slug)
+                ->where('room_id', $room->id)
+                ->exists()) {
+                $slug = $baseSlug . $counter++;
+            }
         }
 
         /* Level bepalen van subroom */

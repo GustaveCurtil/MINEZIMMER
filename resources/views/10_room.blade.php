@@ -20,11 +20,11 @@
         <section id="tree">
             @if ($currentRoom !== $room)
             <div>
-                <p>> <b><a href="{{ url('/' . $room->slug) }}">{{ $room->name }}</a></b>&nbsp;</p>
+                <p>> <b><a href="{{ url('/' . $room->slug) }}">{{ $room->name }}</a></b>&nbsp;
                 @foreach ($currentRoom->parents() as $parent)
-                <p>> <a href="{{ url('/' . $room->slug . '/' . $parent->slug) }}">{{ $parent->name }}</a>&nbsp;</p>
+                > <a href="{{ url('/' . $room->slug . '/' . $parent->slug) }}">{{ $parent->name }}</a>&nbsp;
                 @endforeach
-                <p>> <b>{{ $currentRoom->name }}</b></p>
+                > <b>{{ $currentRoom->name }}</b></p>
             </div>
             @else
             <p>> <b>{{ $room->name }}</b></p>
@@ -38,11 +38,7 @@
         <section id="content">
             <div>
                 @foreach ($subrooms as $subroom)
-                <div>
-                    <a href="{{ url('/' . $room->slug . '/' . $subroom->slug)}}">
-                        <span><svg width="60" height="60" viewBox="0 0 60 60"><path d="M60 60H0V26L30 0L60 26V60Z" fill="white"/></svg></span>{{$subroom->name}}
-                    </a>
-                </div>
+                <a href="{{ url('/' . $room->slug . '/' . $subroom->slug)}}"><span>@include('_partials.icon_house')</span>{{$subroom->name}}</a>
                 @endforeach
             </div>
             

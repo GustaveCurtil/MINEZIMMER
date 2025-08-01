@@ -18,15 +18,8 @@
     <main>
         <section id="content">
             <div>
-                @foreach ($rooms as $room)
-                <div>    
-                    <a href="{{ url('/' . $room->slug)}}">
-                        <span>
-                            <svg width="60" height="60" viewBox="0 0 60 60">
-                            <path d="M60 60H0V26L30 0L60 26V60Z" fill="white"/>
-                            </svg></span>{{$room->name}}
-                    </a> 
-                </div>
+                @foreach ($rooms as $room)  
+                <a href="{{ url('/' . $room->slug)}}"><span>@include('_partials.icon_world')</span>{{$room->name}}</a> 
                 @endforeach
             </div>
             

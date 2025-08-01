@@ -35,6 +35,7 @@ class RoomController extends Controller
             'name' => $validated['name'],
             'description' => $validated['description'],
             'slug' => Str::slug($validated['name']),
+            'write_read' => $validated['write_read']
         ]);
 
         return redirect('/');
@@ -48,6 +49,16 @@ class RoomController extends Controller
             'description' => 'nullable|string',
             'write_read' => 'sometimes|boolean'
         ]);
+
+        /* makes sure the slugs are unique as well */
+        $baseSlug = Str::slug($validated['name']);
+        $slug = $baseSlug;
+        $counter = 1;
+        while (Room::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . $counter;
+            $counter++;
+        }
+        $validated['slug'] = $slug;
 
         $room->update($validated);
 
