@@ -10,6 +10,7 @@ class Room extends Model
         'user_id',
         'name',
         'description',
+        'open',
         'write_read',
         'slug',
         'code',

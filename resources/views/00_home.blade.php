@@ -19,7 +19,13 @@
         <section id="content">
             <div>
                 @foreach ($rooms as $room)  
-                <a href="{{ url('/' . $room->slug)}}"><span>@include('_partials.icon_world')</span>{{$room->name}}</a> 
+                <a href="{{ url('/' . $room->slug)}}">
+                    @if ($room->open)
+                    <span>@include('_partials.icon_star')</span>
+                    @else
+                    <span>@include('_partials.icon_house')</span>
+                    @endif
+                    {{$room->name}}</a> 
                 @endforeach
             </div>
             

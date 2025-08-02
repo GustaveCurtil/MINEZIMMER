@@ -15,6 +15,7 @@ class RoomController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:69|unique:rooms,name',
             'description' => 'nullable|string',
+            'open' => 'boolean',
             'write_read' => 'boolean'
         ]);
 
@@ -35,6 +36,7 @@ class RoomController extends Controller
             'name' => $validated['name'],
             'description' => $validated['description'],
             'slug' => Str::slug($validated['name']),
+            'open' => $validated['open'],
             'write_read' => $validated['write_read']
         ]);
 
@@ -47,7 +49,8 @@ class RoomController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:69', Rule::unique('rooms', 'name')->ignore($room->id)],
             'description' => 'nullable|string',
-            'write_read' => 'sometimes|boolean'
+            'open' => 'boolean',
+            'write_read' => 'boolean'
         ]);
 
         /* makes sure the slugs are unique as well */

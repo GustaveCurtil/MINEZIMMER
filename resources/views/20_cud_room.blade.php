@@ -36,10 +36,10 @@
                     <p>⚠️ {{$message}}</p>
                     @enderror
                     <textarea name="description" id="description" placeholder="beschrijving">{{ old('description', $room->description ?? '') }}</textarea>
-                    <input type="hidden" name="write_read" value="0">
-                    <label for="write-read"><input type="checkbox" name="write_read" id="write-read" value="1" {{ old('write_read', $room->write_read ?? 1) ? 'checked' : '' }}>anderen kunnen ook dingen toevoegen</label>
-                    <input type="hidden" name="open" value="0">
-                    <label for="open"><input type="checkbox" name="open" id="open" value="1" {{ old('open', $room->open ?? 0) ? 'checked' : '' }}>publiek</label>
+                    {{-- <input type="hidden" name="write_read" value="0">
+                    <label for="write-read"><input type="checkbox" name="write_read" id="write-read" value="1" {{ old('write_read', $room->write_read ?? 1) ? 'checked' : '' }}>anderen kunnen ook dingen toevoegen</label> --}}
+                    {{-- <input type="hidden" name="open" value="0">
+                    <label for="open"><input type="checkbox" name="open" id="open" value="1" {{ old('open', $room->open ?? 0) ? 'checked' : '' }}>publiek</label> --}}
                     <button type="submit">{{ $room ? 'Updaten' : 'Zimmerke machen' }}</button>
                 </form>
         </section>

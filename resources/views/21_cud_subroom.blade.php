@@ -43,8 +43,7 @@
                         <p>⚠️ {{$message}}</p>
                         @enderror
                         <textarea name="description" id="description" placeholder="beschrijving">{{ old('description', $update ? ($subroom->description ?? '') : '') }}</textarea>
-                        <input type="hidden" name="write_read" value="0">
-                        
+                    
                         <input type="hidden" name="room_id" value="{{$room->id}}">
                         <input type="hidden" name="subroom_id" value="{{ ($subroom->id ?? '')}}" >
                         
