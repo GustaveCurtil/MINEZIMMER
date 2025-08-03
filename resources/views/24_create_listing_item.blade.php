@@ -32,6 +32,11 @@
                     @enderror
                     <textarea name="description" id="description" placeholder="beschrijving">{{ old('description') }}</textarea>
 
+                    @error('weblink')
+                    <p>⚠️ {{$message}}</p>
+                    @enderror
+                    <input type="text" name="weblink" id="weblink" placeholder="naam" value="{{ old('weblink') }}">
+
                     <input type="hidden" name="listing_id" value="{{$listing->id}}">
 
                     <button type="submit">{{ $room ? 'Updaten' : 'Zimmerke machen' }}</button>

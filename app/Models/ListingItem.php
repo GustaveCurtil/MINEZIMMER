@@ -12,6 +12,7 @@ class ListingItem extends Model
         'user_id',
         'name',
         'description',
+        'weblink',
     ];
 
     public function listing()

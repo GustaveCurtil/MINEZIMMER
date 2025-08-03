@@ -21,9 +21,9 @@
                 @foreach ($rooms as $room)  
                 <a href="{{ url('/' . $room->id)}}">
                     @if ($room->open)
-                    <span>@include('_partials.icon_star')</span>
+                    <span class="svg">@include('_partials.icon_star')</span>
                     @else
-                    <span>@include('_partials.icon_house')</span>
+                    <span class="svg">@include('_partials.icon_house')</span>
                     @endif
                     {{$room->name}}</a> 
                 @endforeach

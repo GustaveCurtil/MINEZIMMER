@@ -22,7 +22,7 @@ Route::prefix('{roomId}')->middleware('auth')->group(function () {
     Route::get('/machen', [PageController::class, 'atelier'])->name('furniture.create');
 
     Route::get('/l-{listingId}', [PageController::class, 'listing'])->name('listing.show');
-    Route::get('/l-{listingId}/bewerken', [PageController::class, 'updateSubroom'])->name('listing.edit');
+    Route::get('/l-{listingId}/bewerken', [PageController::class, 'updateListing'])->name('listing.edit');
     Route::get('/l-{listingId}/zufugen', [PageController::class, 'createListingItem'])->name('listing.add');
 
     Route::prefix('s-{subroomId}')->group(function () {
@@ -50,3 +50,4 @@ Route::post('/maak-lijstitem', [ListingItemController::class, 'create'])->name('
 
 Route::put('/zimmer-updaten/{room}', [RoomController::class, 'update'])->name('room.update');
 Route::put('/zimmerke-updaten/{subroom}', [SubroomController::class, 'update'])->name('subroom.update');
+Route::put('/lijst-updaten/{listing}', [ListingController::class, 'update'])->name('listing.update');

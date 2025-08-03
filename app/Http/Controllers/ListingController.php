@@ -7,6 +7,7 @@ use App\Models\Listing;
 use App\Models\Subroom;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class ListingController extends Controller
@@ -54,5 +55,21 @@ class ListingController extends Controller
         } else {
             return redirect('/' . $room->id);
         }
+    }
+
+    public function update(Request $request, Listing $listing)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:69', Rule::unique('listings', 'name')->ignore($listing->id)],
+            'description' => 'nullable|string',
+        ]);
+
+        $listing->name = $validated['name'];
+        $listing->description = $validated['description'] ?? null;
+
+        $listing->save();
+
+        return redirect('/' . $listing->room_id . '/l-' . $listing->id);
+
     }
 }

@@ -15,6 +15,7 @@ class ListingItemController extends Controller
             'listing_id' => 'required|exists:listings,id',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'weblink' => 'nullable|url',
         ]);
 
         /* Basis info verzamelen */
@@ -27,6 +28,7 @@ class ListingItemController extends Controller
             'user_id' => $user->id,
             'name' => $validated['name'],
             'description' => $validated['description'],
+            'weblink' => $validated['weblink'],
         ]);
 
         return redirect('/' . $room->id . '/l-' . $validated['listing_id']); 

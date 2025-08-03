@@ -146,6 +146,21 @@ class PageController extends Controller
 
     }
 
+    public function updateListing($roomId, $listingId = null) {
+        $user = Auth::user();
+        $room = Room::find($roomId);;
+        $listing = listing::find($listingId);
+        $update = true;
+
+        return view('23_cud_listing', [
+            'user' => $user,
+            'room' => $room,
+            'listing' => $listing,
+            'update' => $update,
+        ]);  
+
+    }
+
     public function createListingItem($roomId, $listingId) {
         $user = Auth::user();
         $room = Room::find($roomId);;
