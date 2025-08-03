@@ -25,8 +25,13 @@ class Room extends Model
     }
 
     
-    public function children()
+    public function subrooms()
     {
-        return $this->hasMany(Subroom::class, 'upper_room_id');
+        return $this->hasMany(Subroom::class, 'room_id');
+    }
+
+    public function listings()
+    {
+        return $this->hasMany(Listing::class, 'room_id');
     }
 }

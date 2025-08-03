@@ -18,12 +18,11 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->integer('level');
             $table->string('color')->nullable();
             $table->string('bg_color')->nullable(); 
-            $table->unique(['name', 'room_id', 'subroom_id']);
-            $table->unique(['slug', 'room_id', 'subroom_id']);        
+            $table->unique(['name', 'room_id', 'subroom_id']);      
             $table->timestamps();
         });
     }

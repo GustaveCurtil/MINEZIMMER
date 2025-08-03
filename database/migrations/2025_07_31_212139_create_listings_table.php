@@ -17,8 +17,10 @@ return new class extends Migration
             $table->foreignId('subroom_id')->nullable()->constrained('subrooms')->onDelete('cascade');
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->string('name');
+            $table->string('slug')->nullable();
             $table->text('description')->nullable();
-            $table->string('slug');
+            $table->boolean('with_description')->default(true);
+            $table->boolean('with_weblink')->default(true);
             $table->unique(['name', 'room_id', 'subroom_id']);
             $table->unique(['slug', 'room_id', 'subroom_id']);
             $table->timestamps();

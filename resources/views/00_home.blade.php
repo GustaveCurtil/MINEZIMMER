@@ -19,7 +19,7 @@
         <section id="content">
             <div>
                 @foreach ($rooms as $room)  
-                <a href="{{ url('/' . $room->slug)}}">
+                <a href="{{ url('/' . $room->id)}}">
                     @if ($room->open)
                     <span>@include('_partials.icon_star')</span>
                     @else
@@ -32,7 +32,7 @@
         </section>
     </main>
     <footer>
-        <a href="{{  url('/machen') }}"><button>+</button></a>
+        <a href="{{  url('/zimmermachen') }}"><button>+</button></a>
     </footer>
 </body>
 

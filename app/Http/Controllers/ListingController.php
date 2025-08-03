@@ -15,15 +15,18 @@ class ListingController extends Controller
     {
         $validated = $request->validate([
             'room_id' => 'required|exists:rooms,id',
-            'subroom_id' => 'required|exists:rooms,id',
+            'subroom_id' => 'nullable|exists:subrooms,id',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
 
         /* Basis info verzamelen */
         $user = Auth::user();
-        $room = Room::where('id', $validated['room_id'])->firstOrFail();
-        $subroom = $validated['subroom_id'] ? Subroom::findOrFail($validated['subroom_id']) : null;
+        $room = Room::find($validated['room_id']);
+        $subroom = null;
+        if (!empty($validated['subroom_id'])) {
+            $subroom = $room->subrooms()->findOrFail($validated['subroom_id']);
+        }
 
         // Generate base slug
         $baseName = $validated['name'];
@@ -37,27 +40,19 @@ class ListingController extends Controller
             $name = $baseName . $counter++;
         }
 
-        $baseSlug = Str::slug($validated['name']);
-        $slug = $baseSlug;
-        $counter = 2;
 
-        while (Listing::where('slug', $slug)
-            ->where('subroom_id', $subroomId)
-            ->where('room_id', $room->id)
-            ->exists()) {
-            $slug = $baseSlug . $counter++;
-        }
-
-
-        $listing = Listing::create([
+        Listing::create([
             'room_id' => $request->room_id,
             'subroom_id' => $request->subroom_id,
             'user_id' => $user->id,
             'name' => $name,
-            'slug' => $slug,
             'description' => $request->description,
         ]);
 
-        return redirect()->route('listings.show', $listing);
+        if ($subroom) {
+            return redirect('/' . $room->id . '/s-' . $subroom->id); 
+        } else {
+            return redirect('/' . $room->id);
+        }
     }
 }

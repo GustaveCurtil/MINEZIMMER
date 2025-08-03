@@ -36,8 +36,8 @@ class RoomController extends Controller
             'name' => $validated['name'],
             'description' => $validated['description'],
             'slug' => Str::slug($validated['name']),
-            'open' => $validated['open'],
-            'write_read' => $validated['write_read']
+            // 'open' => $validated['open'],
+            // 'write_read' => $validated['write_read']
         ]);
 
         return redirect('/');
@@ -65,6 +65,6 @@ class RoomController extends Controller
 
         $room->update($validated);
 
-        return redirect('/' . $room->slug);
+        return redirect('/' . $room->id);
     }
 }

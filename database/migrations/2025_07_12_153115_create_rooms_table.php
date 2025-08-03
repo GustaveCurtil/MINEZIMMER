@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained();            
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('slug')->unique();
+            $table->string('slug')->nullable();
             $table->boolean('open')->default(true);
             $table->string('code')->unique()->nullable();
             $table->boolean('write_read')->default(true);

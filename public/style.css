@@ -40,13 +40,14 @@ textarea { width: 100%; height: var(--height-field); resize: none; overflow: hid
 textarea::placeholder { color: var(--color-contrast); }
 
 /* FORMALITIES HOLY GRAIL */
-body { overflow: hidden; height: 100svh; width: 100vw; background-color: var(--color-achtergrond);} /*background-image: url('/media/Twinkling_Stars.gif');*/
+body { overflow: hidden; height: 100svh; width: 100vw; background-color: var(--color-achtergrond); background-image: url('/media/Twinkling_Stars.gif');} /*background-image: url('/media/Twinkling_Stars.gif');*/
 header { position: absolute; top: 0; width: 100%; height: var(--height-header); padding: var(--gap-small); display: flex; align-items: center; justify-content: space-between; }
 main { width: 100%; height: 100svh; padding: var(--gap-small); overflow-y: auto; padding-top: calc(var(--gap-small) + var(--height-header)); padding-bottom: calc(var(--gap-small) + var(--height-footer));}
 footer { position: absolute; bottom: 0; width: 100%; height: var(--height-footer); padding: 0 var(--gap-small); display: flex; align-items: center; justify-content: center; font-size: 0.9rem;}
 section { width: 100%;}
 section.center { width: 100%; max-width: var(--width-max); margin: 0 auto;}
 section:not(:last-of-type) { margin-bottom: var(--gap-small);}
+section.middle {text-align: center;}
 
 /* LOGIN AREA */
 main.middle>div { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100%;}
@@ -62,6 +63,12 @@ main section#content>div { line-height: var(--height-line); width: 100%; display
 main section#content>div a {display: inline-flex; max-width: 100%; line-height: 1.2rem; padding: var(--gap-mini) 0;}
 main section#content>div a>span { text-decoration: none; padding-right: var(--gap-small); height: 1.2rem; display: inline-flex;align-items: center; }
 main section#content>div svg { min-height: calc(var(--height-line) / 2); min-width: calc(var(--height-line) / 2); height: calc(var(--height-line) / 2); width: calc(var(--height-line) / 2);}
+
+/* ATELIER */
+section.center a {margin: var(--gap-small) auto;}
+
+/* LISTING */
+li {list-style: inside}
 
 /* FOOTER */
 footer>a:hover { background-color:transparent;}

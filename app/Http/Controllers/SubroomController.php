@@ -71,9 +71,9 @@ class SubroomController extends Controller
         ]);
 
         if ($subroom) {
-            return redirect('/' . $room->slug . '/' . $subroom->slug);  
+            return redirect('/' . $room->id . '/s-' . $subroom->id);  
         } else {
-            return redirect('/' . $room->slug);
+            return redirect('/' . $room->id);
         }
         
     }
@@ -125,6 +125,6 @@ class SubroomController extends Controller
         // Fetch room slug for redirect
         $room = Room::findOrFail($subroom->room_id);
 
-        return redirect('/' . $room->slug . '/' . $subroom->slug);
+        return redirect('/' . $room->id . '/s-' . $subroom->id);
     }
 }
