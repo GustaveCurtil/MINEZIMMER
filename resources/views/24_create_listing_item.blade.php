@@ -9,11 +9,7 @@
 <body>
     <header>
         <h1><a href="{{ route('home') }}">MINEZIMMER</a></h1>
-        @if ($room)
-        <a href="{{ str_replace('/bewerken', '', url()->current()) }}">terug</a>
-        @else 
-        <a href="{{ route('home') }}">terug</a>
-        @endif
+        <a href="{{ str_replace('/zufugen', '', url()->current()) }}">terug</a>
     </header> 
 </body>
 <main class="middle no-footer">
@@ -35,7 +31,7 @@
                     @error('weblink')
                     <p>⚠️ {{$message}}</p>
                     @enderror
-                    <input type="text" name="weblink" id="weblink" placeholder="naam" value="{{ old('weblink') }}">
+                    <input type="text" name="weblink" id="weblink" placeholder="url" value="{{ old('weblink') }}">
 
                     <input type="hidden" name="listing_id" value="{{$listing->id}}">
 

@@ -68,8 +68,10 @@ svg { min-height: calc(var(--height-line) / 2); min-width: calc(var(--height-lin
 section.center a {margin: var(--gap-small) auto;}
 
 /* LISTING */
-details > summary {list-style-type: '+';}
-details[open] > summary {list-style-type: '-';}
+summary { list-style: none; cursor: pointer; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: '+ '; }
+details[open] summary::before { content: '- '; }
 span.list-item {padding-left: var(--gap-mini);}
 details > p {font-size: 0.8rem;}
 

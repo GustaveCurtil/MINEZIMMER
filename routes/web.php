@@ -17,9 +17,9 @@ Route::get('/zimmermachen', [PageController::class, 'createRoom'])->middleware('
 Route::prefix('{roomId}')->middleware('auth')->group(function () {
     Route::get('/bewerken', [PageController::class, 'editRoom'])->name('room.edit');
 
-    Route::get('/zimmermachen', [PageController::class, 'createSubroom'])->name('subroom.create');
-    Route::get('/listemachen', [PageController::class, 'createListing'])->name('listing.create');
-    Route::get('/machen', [PageController::class, 'atelier'])->name('furniture.create');
+    Route::get('/zimmermachen', [PageController::class, 'createSubroom']);
+    Route::get('/listemachen', [PageController::class, 'createListing']);
+    Route::get('/machen', [PageController::class, 'atelier']);
 
     Route::get('/l-{listingId}', [PageController::class, 'listing'])->name('listing.show');
     Route::get('/l-{listingId}/bewerken', [PageController::class, 'updateListing'])->name('listing.edit');

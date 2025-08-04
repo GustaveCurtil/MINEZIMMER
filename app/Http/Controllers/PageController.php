@@ -46,12 +46,15 @@ class PageController extends Controller
         //     $subroom->type = "room";
         // }
 
-        if ($room) {
-            return view('10_room', ['user' => $user, 'room' => $room, 'currentRoom' => $currentRoom, 'subrooms' => $subrooms, 'listings' => $listings]);  
-        } else {
+        if ($currentRoom->room_id && $currentRoom->room_id !== $room->id) {
             return redirect('/');
         }
-        
+
+        if (!$room) {
+            return redirect('/');
+        }
+
+        return view('10_room', ['user' => $user, 'room' => $room, 'currentRoom' => $currentRoom, 'subrooms' => $subrooms, 'listings' => $listings]);  
     }
 
     public function listing($roomId, $listingId) 
@@ -61,11 +64,11 @@ class PageController extends Controller
         $listing = Listing::find($listingId);
         $listingItems = $listing->items;
 
-        if ($room) {
-            return view('11_listing', ['user' => $user, 'listing' => $listing, 'listingItems' => $listingItems]);  
-        } else {
+        if ($listing->room_id !== $room->id) {
             return redirect('/');
         }
+
+        return view('11_listing', ['user' => $user, 'listing' => $listing, 'listingItems' => $listingItems]);  
         
     }
 
