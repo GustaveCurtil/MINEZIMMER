@@ -21,11 +21,11 @@
         <section class="center" id="content">
             <div>
                 @if (!$subroom)
-                <a href="{{  url('/' . $room->id . '/zimmermachen') }}"><span>@include('_partials.icon_room')</span>zimmer machen</a>
-                <a href="{{  url('/' . $room->id . '/listemachen') }}"><span>@include('_partials.icon_listing')</span>liste machen</a>
+                <a href="{{  url('/' . $room->id . '/zimmermachen') }}"><span class="icon">@include('_partials.icon_room')</span>kamer machen</a>
+                <a href="{{  url('/' . $room->id . '/listemachen') }}"><span class="icon">@include('_partials.icon_listing')</span>lijst machen</a>
                 @else
-                <a href="{{  url('/' . $room->id . '/s-' . $subroom->id . '/zimmermachen') }}"><span>@include('_partials.icon_room')</span>zimmer machen</a>
-                <a href="{{  url('/' . $room->id . '/s-' . $subroom->id . '/listemachen') }}"><span>@include('_partials.icon_listing')</span>liste machen</a>
+                <a href="{{  url('/' . $room->id . '/s-' . $subroom->id . '/zimmermachen') }}"><span class="icon">@include('_partials.icon_room')</span>kamer machen</a>
+                <a href="{{  url('/' . $room->id . '/s-' . $subroom->id . '/listemachen') }}"><span class="icon">@include('_partials.icon_listing')</span>lijst machen</a>
                 @endif
             </div>
             

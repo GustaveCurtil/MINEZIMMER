@@ -26,20 +26,23 @@
                     @method('PUT')
                 @endif 
                     @csrf
+                    <fieldset>
+                        @error('name')
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                        <label for="name">Naam</label>
+                        <input type="text" name="name" id="name" placeholder="naam" value="{{ old('name', $room->name ?? '') }}">
 
-                    @error('name')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
-                    <input type="text" name="name" id="name" placeholder="naam" value="{{ old('name', $room->name ?? '') }}">
-
-                    @error('description')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
-                    <textarea name="description" id="description" placeholder="beschrijving">{{ old('description', $room->description ?? '') }}</textarea>
-                    {{-- <input type="hidden" name="write_read" value="0">
-                    <label for="write-read"><input type="checkbox" name="write_read" id="write-read" value="1" {{ old('write_read', $room->write_read ?? 1) ? 'checked' : '' }}>anderen kunnen ook dingen toevoegen</label> --}}
-                    {{-- <input type="hidden" name="open" value="0">
-                    <label for="open"><input type="checkbox" name="open" id="open" value="1" {{ old('open', $room->open ?? 0) ? 'checked' : '' }}>publiek</label> --}}
+                        @error('description')
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                        <label for="description">Beschrijving</label>
+                        <textarea name="description" id="description" placeholder="beschrijving">{{ old('description', $room->description ?? '') }}</textarea>
+                        {{-- <input type="hidden" name="write_read" value="0">
+                        <label for="write-read"><input type="checkbox" name="write_read" id="write-read" value="1" {{ old('write_read', $room->write_read ?? 1) ? 'checked' : '' }}>anderen kunnen ook dingen toevoegen</label> --}}
+                        {{-- <input type="hidden" name="open" value="0">
+                        <label for="open"><input type="checkbox" name="open" id="open" value="1" {{ old('open', $room->open ?? 0) ? 'checked' : '' }}>publiek</label> --}}
+                    </fieldset>
                     <button type="submit">{{ $room ? 'Updaten' : 'Zimmerke machen' }}</button>
                 </form>
         </section>

@@ -19,6 +19,9 @@ class ListingController extends Controller
             'subroom_id' => 'nullable|exists:subrooms,id',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'title_label' => 'nullable|string|max:60',
+            'with_subtitle' => 'boolean',
+            'subtitle_label' => 'nullable|string|max:60',
         ]);
 
         /* Basis info verzamelen */
@@ -48,6 +51,9 @@ class ListingController extends Controller
             'user_id' => $user->id,
             'name' => $name,
             'description' => $request->description,
+            'title_label' => $request->title_label,
+            'with_subtitle' => $request->with_subtitle,
+            'subtitle_label' => $request->subtitle_label,
         ]);
 
         if ($subroom) {
@@ -62,12 +68,12 @@ class ListingController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:69', Rule::unique('listings', 'name')->ignore($listing->id)],
             'description' => 'nullable|string',
+            'title_label' => 'nullable|string|max:60',
+            'with_subtitle' => 'boolean',
+            'subtitle_label' => 'nullable|string|max:60',
         ]);
 
-        $listing->name = $validated['name'];
-        $listing->description = $validated['description'] ?? null;
-
-        $listing->save();
+        $listing->update($validated);
 
         return redirect('/' . $listing->room_id . '/l-' . $listing->id);
 

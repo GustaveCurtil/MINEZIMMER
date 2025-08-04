@@ -11,7 +11,7 @@
             @endif
         </h1>
         @if ($listing->user->id === $user->id)
-         <a href="{{ url('/' . $listing->room->id . '/l-' . $listing->id . '/bewerken') }}">kamer bewerken</a>
+         <a href="{{ url('/' . $listing->room->id . '/l-' . $listing->id . '/bewerken') }}">lijst bewerken</a>
         @endif
     </header>
     <main>
@@ -24,7 +24,7 @@
                 @endforeach
                 > <a href="{{ url('/' . $listing->room->id . '/s-' . $listing->subroom->id) }}">{{ $listing->subroom->name }}</a> 
                 @endif
-                > <b>{{ $listing->name }}</b><span class='svg'>&nbsp;@include('_partials.icon_listing')</span></p>
+                > <span class='svg'>@include('_partials.icon_listing')</span><b>{{ $listing->name }}</b></p>
             </div>
         </section>
 
@@ -36,16 +36,21 @@
             <div>
                 <ul>
                     @foreach ($listingItems as $listingItem)
-                    @if ($listingItem->description || $listingItem->weblink )
+                    @if ($listingItem->description || $listingItem->weblink || $listing->with_subtitle && $listingItem->subtitle)
                     <details>
-                        <summary><span class="list-item">{{$listingItem->name}}</span></summary>
-                        <p>{{$listingItem->description}}</p>
+                        <summary><span class="list-item">{{$listingItem->title}}</span></summary>
+                        @if ($listing->with_subtitle && $listingItem->subtitle)
+                        <p>{{$listing->subtitle_label}}: {{$listingItem->subtitle}}</p>
+                        @endif
+                        @if ($listingItem->description)
+                        <p>beschrijving: {{$listingItem->description}}</p>
+                        @endif
                         @if ($listingItem->weblink)
                         <p><a href="{{$listingItem->weblink}}" target="_blank">weblink</a></p>
                         @endif
                     </details>
                     @else
-                    <p>-<span class="list-item">{{$listingItem->name}}</span></p>
+                    <p>- {{$listingItem->name}}</p>
                     @endif
                     @endforeach
                 </ul>

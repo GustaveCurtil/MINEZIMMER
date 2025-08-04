@@ -13,7 +13,8 @@ class ListingItemController extends Controller
     {
         $validated = $request->validate([
             'listing_id' => 'required|exists:listings,id',
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'subtitle' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'weblink' => 'nullable|url',
         ]);
@@ -26,9 +27,10 @@ class ListingItemController extends Controller
         ListingItem::create([
             'listing_id' => $validated['listing_id'],
             'user_id' => $user->id,
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'weblink' => $validated['weblink'],
+            'title' => $validated['title'],
+            'subtitle' => $validated['subtitle'] ?? null,
+            'description' => $validated['description'] ?? null,
+            'weblink' => $validated['weblink'] ?? null,
         ]);
 
         return redirect('/' . $room->id . '/l-' . $validated['listing_id']); 

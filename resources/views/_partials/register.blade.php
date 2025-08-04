@@ -8,14 +8,18 @@
                 <h2>Inloggen</h2>
                 <form method="POST" action="{{ route('account.login') }}">
                     @csrf
-                    @error('name')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
-                    @error('password')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
-                    <input type="text" name="name" id="name" required autofocus placeholder="Naam">
-                    <input type="password" name="password" id="password" required placeholder="Wachtwoord">
+                    <fieldset>
+                        @error('name')
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                        @error('password')
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                        <label for="name">Gebruikersnaam</label>
+                        <input type="text" name="name" id="name" required autofocus placeholder="Naam">
+                        <label for="password">Wachtwoord</label>
+                        <input type="password" name="password" id="password" required placeholder="Wachtwoord">
+                    </fieldset>
                     <button type="submit">Inloggen</button>
                 </form> 
             </section>
@@ -23,20 +27,25 @@
                 <h2>Aanmelden</h2>
                 <form action="{{ route('account.register') }}" method="POST">
                     @csrf
-                    @error('register_name')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
-                    @error('register_password')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
+                    <fieldset>
+                        @error('register_name')
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                        @error('register_password')
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
 
-                    @error('register_agree')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
-                    <input type="text" name="register_name" id="name" placeholder="Naam" required minlength="2">
-                    <input type="password" name="register_password" id="password" placeholder="Wachtwoord" required minlength="2">
-                    <input type="password" name="register_password_confirmation" id="password-check" placeholder="Wachtwoord check" required>
-                    <label for="register_agree"><input type="checkbox" name="register_agree" id="agree" required>ik ga akkoord</label>
+                        @error('register_agree')
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                         <label for="register-name">Kies een naam</label>
+                        <input type="text" name="register_name" id="register-name" placeholder="Naam" required minlength="2">
+                        <label for="register-password">Wachtwoord (mag gemakkelijk zijn)</label>
+                        <input type="password" name="register_password" id="register-password" placeholder="Wachtwoord" required minlength="2">
+                        <label for="register-password-check">Wachtwoord herhalen</label>
+                        <input type="password" name="register_password_confirmation" id="register-password-check" placeholder="Wachtwoord check" required>
+                        <label for="register_agree"><input type="checkbox" name="register_agree" id="agree" required>ik ga akkoord met vanalles en nogwat</label>
+                    </fieldset>    
                     <button type="submit">Maak account aan</button>
                 </form>
             </section>

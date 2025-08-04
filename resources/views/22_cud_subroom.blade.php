@@ -31,20 +31,22 @@
                         @method('PUT')
                  @endif 
                         @csrf
+                        <fieldset>
+                            @error('name')
+                            <p>⚠️ {{$message}}</p>
+                            @enderror
+                            <label for="name">Naam</label>
+                            <input type="text" name="name" id="name" value="{{ old('name', $update ? ($subroom->name ?? '') : '') }}">
 
-                        @error('name')
-                        <p>⚠️ {{$message}}</p>
-                        @enderror
-                        <input type="text" name="name" id="name" placeholder="naam" value="{{ old('name', $update ? ($subroom->name ?? '') : '') }}">
-
-                        @error('description')
-                        <p>⚠️ {{$message}}</p>
-                        @enderror
-                        <textarea name="description" id="description" placeholder="beschrijving">{{ old('description', $update ? ($subroom->description ?? '') : '') }}</textarea>
-                    
-                        <input type="hidden" name="room_id" value="{{$room->id}}">
-                        <input type="hidden" name="subroom_id" value="{{ ($subroom->id ?? '')}}" >
+                            @error('description')
+                            <p>⚠️ {{$message}}</p>
+                            @enderror
+                            <label for="description">Beschrijving</label>
+                            <textarea name="description" id="description">{{ old('description', $update ? ($subroom->description ?? '') : '') }}</textarea>
                         
+                            <input type="hidden" name="room_id" value="{{$room->id}}">
+                            <input type="hidden" name="subroom_id" value="{{ ($subroom->id ?? '')}}" >
+                        </fieldset>
                         <button type="submit">{{ $update ? 'Updaten' : 'Zimmerke machen' }}</button>
                     </form>
             </section>

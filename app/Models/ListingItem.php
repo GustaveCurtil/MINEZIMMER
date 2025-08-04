@@ -10,7 +10,8 @@ class ListingItem extends Model
     protected $fillable = [
         'listing_id',
         'user_id',
-        'name',
+        'title',
+        'subtitle',
         'description',
         'weblink',
     ];

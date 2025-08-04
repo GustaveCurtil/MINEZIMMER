@@ -17,25 +17,38 @@
         <section class="center">
                 <form action="{{ route('listingitem.create') }}" method="POST">
                     @csrf
+                    <h3>Item zufugen</h3>
+                    <fieldset>
+                        @error("title")
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                        <label for="title">{{$listing->title_label}}*</label>
+                        <input type="text" name="title" id="title" placeholder="{{$listing->title_label}}" value="{{ old("title") }}">
 
-                    @error('name')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
-                    <input type="text" name="name" id="name" placeholder="naam" value="{{ old('name') }}">
+                        @if ($listing->with_subtitle)
+                        @error("subtitle")
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                        <label for="subtitle">{{$listing->subtitle_label}}</label>
+                        <input type="text" name="subtitle" id="subtitle" placeholder="{{$listing->subtitle_label}}" value="{{ old("subtitle") }}">
+                        @endif
+                        
+                        @error('description')
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                        <label for="description">Beschrijving</label>
+                        <textarea name="description" id="description" placeholder="beschrijving">{{ old('description') }}</textarea>
 
-                    @error('description')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
-                    <textarea name="description" id="description" placeholder="beschrijving">{{ old('description') }}</textarea>
+                        @error('weblink')
+                        <p>⚠️ {{$message}}</p>
+                        @enderror
+                        <label for="weblink">url</label>
+                        <input type="text" name="weblink" id="weblink" placeholder="url" value="{{ old('weblink') }}">
 
-                    @error('weblink')
-                    <p>⚠️ {{$message}}</p>
-                    @enderror
-                    <input type="text" name="weblink" id="weblink" placeholder="url" value="{{ old('weblink') }}">
+                        <input type="hidden" name="listing_id" value="{{$listing->id}}">
+                    </fieldset>
 
-                    <input type="hidden" name="listing_id" value="{{$listing->id}}">
-
-                    <button type="submit">{{ $room ? 'Updaten' : 'Zimmerke machen' }}</button>
+                    <button type="submit">{{ $update ? 'Updaten' : 'item machen' }}</button>
                 </form>
         </section>
     </div>

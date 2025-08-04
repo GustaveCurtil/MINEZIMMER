@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
+            $table->string('title_label')->nullable();
+            $table->boolean('with_subtitle')->default(false);
+            $table->string('subtitle_label')->nullable();
             $table->boolean('with_description')->default(true);
             $table->boolean('with_weblink')->default(true);
             $table->unique(['name', 'room_id', 'subroom_id']);

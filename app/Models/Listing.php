@@ -14,6 +14,11 @@ class Listing extends Model
         'name',
         'description',
         'slug',
+        'title_label',
+        'with_subtitle',
+        'subtitle_label', 
+        'with_description', 
+        'with_weblink',
     ];
 
 
