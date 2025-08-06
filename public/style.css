@@ -32,7 +32,7 @@ fieldset { margin-bottom: var(--gap-big); display: flex; flex-direction: column;
 input { height: var(--height-field); border: var(--border); border-radius: 0; background-color: var(--color-tekst); font-family: var(--font-display); padding: 0 var(--gap-mini);}
 input::placeholder { color: var(--color-contrast); }
 label {display: inline-flex; align-items: center; margin-bottom: var(--gap-mini); }
-label:not(:first-of-type) {margin-top: var(--gap-big);}
+label:not(:first-of-type) {margin-top: var(--gap-small);}
 input[type="checkbox"] { height: var(--height-field); width: var(--height-field); cursor: pointer; margin-bottom: 0;}
 button { height: var(--height-field); text-decoration: underline; border: var(--border); border-radius: 0; color: var(--color-tekst); background-color: transparent; font-family: var(--font-display); padding: 0 var(--gap-mini);}
 button:hover {color: var(--color-contrast); background-color: rgba(255, 255, 255, 0.615); }
@@ -64,7 +64,7 @@ main.middle input[type="checkbox"] { margin-right: var(--gap-small); }
 main section#tree div {display: flex; flex-wrap: wrap;}
 main section#content>div { line-height: var(--height-line); width: 100%; display: flex; flex-direction: column;}
 main section#content>div a {display: inline-flex; max-width: 100%; line-height: 1.2rem; padding: var(--gap-mini) 0;}
-span.icon { text-decoration: none; padding-right: var(--gap-small); display: inline-flex;align-items: center; }
+span.icon { text-decoration: none; padding-right: var(--gap-small); display: inline-flex;align-items: center; font-family: none; }
 svg { min-height: calc(var(--height-line) / 2); min-width: calc(var(--height-line) / 2); height: calc(var(--height-line) / 2); width: calc(var(--height-line) / 2);}
 
 /* ATELIER */

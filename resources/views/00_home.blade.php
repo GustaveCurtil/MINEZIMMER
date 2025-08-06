@@ -16,6 +16,7 @@
         @endauth
     </header>
     <main>
+        @if ($rooms)
         <section id="content">
             <div>
                 @foreach ($rooms as $room)  
@@ -30,6 +31,7 @@
             </div>
             
         </section>
+        @endif
     </main>
     <footer>
         <a href="{{  url('/zimmermachen') }}"><button>+</button></a>

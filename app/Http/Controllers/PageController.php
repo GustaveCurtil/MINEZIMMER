@@ -14,7 +14,22 @@ class PageController extends Controller
     public function home() 
     {
         $user = Auth::user();
-        $rooms = Room::orderBy('name', 'asc')->get();
+        $rooms = null;
+        if ($user) {
+            $rooms = Room::where('open', true)
+            ->orWhere(function ($query) use ($user) {
+                $query->where('open', false)
+                    ->where(function ($q) use ($user) {
+                        $q->where('user_id', $user->id)
+                            ->orWhereHas('members', function ($subQuery) use ($user) {
+                                $subQuery->where('user_id', $user->id);
+                            });
+                    });
+            })
+            ->orderBy('name', 'asc')
+            ->get();
+        }
+        
         return view('00_home', ['user' => $user, 'rooms' => $rooms]);
     }
 
@@ -27,7 +42,19 @@ class PageController extends Controller
     public function room($roomId, $subroomId = null) 
     {
         $user = Auth::user();
-        $room = Room::find($roomId);
+        $room = Room::where('id', $roomId)
+        ->where(function ($query) use ($user) {
+            $query->where('open', true) // public room
+                ->orWhere('user_id', $user->id) // creator
+                ->orWhereHas('members', function ($q) use ($user) {
+                    $q->where('user_id', $user->id); // member
+                });
+        })
+        ->first();
+
+        if (!$room) {
+            return redirect('/');
+        }
 
         if ($subroomId) {
             $currentRoom = Subroom::find($subroomId);
@@ -47,10 +74,6 @@ class PageController extends Controller
         // }
 
         if ($currentRoom->room_id && $currentRoom->room_id !== $room->id) {
-            return redirect('/');
-        }
-
-        if (!$room) {
             return redirect('/');
         }
 

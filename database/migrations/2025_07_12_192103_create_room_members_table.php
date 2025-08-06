@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('room_members', function (Blueprint $table) {
             $table->id();
             $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
-            $table->foreignId('guest_id')->nullable()->constrained('guests')->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('role')->default('normal');
             $table->timestamps();
         });
     }

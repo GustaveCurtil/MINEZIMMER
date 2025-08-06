@@ -6,6 +6,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\SubroomController;
+use App\Http\Controllers\RoomMemberController;
 use App\Http\Controllers\ListingItemController;
 
 // Static routes
@@ -47,6 +48,8 @@ Route::post('/maak-zimmer', [RoomController::class, 'create'])->name('room.creat
 Route::post('/maak-zimmerke', [SubroomController::class, 'create'])->name('subroom.create');
 Route::post('/maak-lijst', [ListingController::class, 'create'])->name('listing.create');
 Route::post('/maak-lijstitem', [ListingItemController::class, 'create'])->name('listingitem.create');
+
+Route::post('/zimmer-toevoegen', [RoomMemberController::class, 'create'])->name('roommember.create');
 
 Route::put('/zimmer-updaten/{room}', [RoomController::class, 'update'])->name('room.update');
 Route::put('/zimmerke-updaten/{subroom}', [SubroomController::class, 'update'])->name('subroom.update');

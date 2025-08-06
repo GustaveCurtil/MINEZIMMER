@@ -34,4 +34,9 @@ class Room extends Model
     {
         return $this->hasMany(Listing::class, 'room_id');
     }
+
+    public function members()
+    {
+        return $this->hasMany(RoomMember::class);
+    }
 }

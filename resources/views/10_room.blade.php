@@ -33,6 +33,12 @@
             @endif
         </section>
 
+        @if ($currentRoom === $room && !$room->open)
+        <section>
+            <p>Code van de zimmer: {{$room->code}}</p>
+        </section>
+        @endif
+
         <section id="description">
             <p>{!! nl2br(e($currentRoom->description ?? '')) !!}</p>
         </section>

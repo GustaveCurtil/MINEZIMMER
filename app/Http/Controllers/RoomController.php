@@ -31,12 +31,15 @@ class RoomController extends Controller
             $counter++;
         }
 
+        $code = $this->generateCode();
+
         Room::create([
             'user_id' => $user->id,
             'name' => $validated['name'],
             'description' => $validated['description'],
             'slug' => Str::slug($validated['name']),
-            // 'open' => $validated['open'],
+            'open' => $validated['open'],
+            'code' => $code
             // 'write_read' => $validated['write_read']
         ]);
 
@@ -63,8 +66,22 @@ class RoomController extends Controller
         }
         $validated['slug'] = $slug;
 
+        /* only generate a new code when the room is changed from open to being closed */
+        if (!$validated['open'] && $room->open) {
+            $validated['code'] = $this->generateCode();
+        }
+
         $room->update($validated);
 
         return redirect('/' . $room->id);
+    }
+
+    private function generateCode()
+    {
+        do {
+            $code = random_int(1000, 9999); // Generates a 4-digit number
+        } while (Room::where('code', $code)->exists());
+
+        return $code;
     }
 }
