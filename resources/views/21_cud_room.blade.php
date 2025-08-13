@@ -10,9 +10,9 @@
     <header>
         <h1><a href="{{ route('home') }}">MINEZIMMER</a></h1>
         @if ($room)
-        <a href="{{ str_replace('/bewerken', '', url()->current()) }}">terug</a>
+        <a href="{{ str_replace('/bewerken', '', url()->current()) }}">zuruck</a>
         @else 
-        <a href="{{ route('home') }}">terug</a>
+        <a href="{{ route('home') }}">zuruck</a>
         @endif
     </header> 
 </body>
@@ -30,7 +30,7 @@
                     <label for="code">Code</label>
                     <input type="text" name="code" id="code">
                 </fieldset>    
-                <button type="submit">Ga naar Zimmer</button>
+                <button type="submit">Gehe nach Zimmer</button>
             </form>
         </section>
         <br>

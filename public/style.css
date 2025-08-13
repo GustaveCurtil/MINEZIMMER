@@ -46,7 +46,7 @@ input.sub {margin-top: 0;}
 /* FORMALITIES HOLY GRAIL */
 body { overflow: hidden; height: 100svh; width: 100vw; background-color: var(--color-achtergrond); background-image: url('/media/Twinkling_Stars.gif');} /*background-image: url('/media/Twinkling_Stars.gif');*/
 header { position: absolute; top: 0; width: 100%; height: var(--height-header); padding: var(--gap-small); display: flex; align-items: center; justify-content: space-between; }
-main { width: 100%; height: 100svh; padding: var(--gap-small); overflow-y: auto; padding-top: calc(var(--gap-small) + var(--height-header)); padding-bottom: calc(var(--gap-small) + var(--height-footer));}
+main { width: 100%; height: 100svh; position: relative; padding: var(--gap-small); overflow-y: auto; padding-top: calc(var(--gap-small) + var(--height-header)); padding-bottom: calc(var(--gap-small) + var(--height-footer));}
 footer { position: absolute; bottom: 0; width: 100%; height: var(--height-footer); padding: 0 var(--gap-small); display: flex; align-items: center; justify-content: center; font-size: 0.9rem;}
 section { width: 100%;}
 section.center { width: 100%; max-width: var(--width-max); margin: 0 auto;}
@@ -61,7 +61,7 @@ main.middle form { margin-top: var(--gap-small);}
 main.middle input[type="checkbox"] { margin-right: var(--gap-small); }
 
 /* OVERVIEW (SUB)ROOMS */
-main section#tree div {display: flex; flex-wrap: wrap;}
+main section#tree div {display: flex; flex-wrap: wrap; position: fixed;}
 main section#content>div { line-height: var(--height-line); width: 100%; display: flex; flex-direction: column;}
 main section#content>div a {display: inline-flex; max-width: 100%; line-height: 1.2rem; padding: var(--gap-mini) 0;}
 span.icon { text-decoration: none; padding-right: var(--gap-small); display: inline-flex;align-items: center; font-family: none; }

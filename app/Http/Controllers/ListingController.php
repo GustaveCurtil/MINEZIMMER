@@ -22,6 +22,8 @@ class ListingController extends Controller
             'title_label' => 'nullable|string|max:60',
             'with_subtitle' => 'boolean',
             'subtitle_label' => 'nullable|string|max:60',
+            'with_description' => 'boolean',
+            'with_weblink' => 'boolean'
         ]);
 
         /* Basis info verzamelen */
@@ -71,6 +73,8 @@ class ListingController extends Controller
             'title_label' => 'nullable|string|max:60',
             'with_subtitle' => 'boolean',
             'subtitle_label' => 'nullable|string|max:60',
+            'with_description' => 'boolean',
+            'with_weblink' => 'boolean'
         ]);
 
         $listing->update($validated);

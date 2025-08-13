@@ -15,9 +15,9 @@
             @endif
         </h1>
         @if ($update)
-        <a href="{{ str_replace('/bewerken', '', url()->current()) }}">terug</a>
+        <a href="{{ str_replace('/bewerken', '', url()->current()) }}">zuruck</a>
         @else
-        <a href="{{ str_replace('listemachen', 'machen', url()->current()) }}">terug</a>
+        <a href="{{ str_replace('listemachen', 'machen', url()->current()) }}">zuruck</a>
         @endif
 
     </header> 
@@ -54,10 +54,13 @@
                             <label for="with-subtitle"><input type="checkbox" name="with_subtitle" id="with-subtitle" value="1" {{ old('with_subtitle', $listing->with_subtitle ?? 0) ? 'checked' : '' }}>subtitel toevoegen</label>
                             <label for="subtitle_label" class="sub">Label voor subtitel</label>
                             <input type="text" class="sub" name="subtitle_label" id="subtitle-label" placeholder="bv. artiest, auteur, kok, ..." value="{{ old('subtitle_label', $update ? ($listing->subtitle_label ?? '') : '') }}">
-                            {{-- <input type="hidden" name="with_description" value="0">
+                            
+                            <input type="hidden" name="with_description" value="0">
                             <label for="with-description"><input type="checkbox" name="with_description" id="with-description" value="1" {{ old('with_description', $listing->with_description ?? 1) ? 'checked' : '' }}>beschrijving toevoegen aan items</label>
+
                             <input type="hidden" name="with_weblink" value="0">
-                            <label for="with-weblink"><input type="checkbox" name="with_weblink" id="with-weblink" value="1" {{ old('with_weblink', $listing->with_weblink ?? 0) ? 'checked' : '' }}>weblink toevoegen aan items</label>  --}}
+                            <label for="with-weblink"><input type="checkbox" name="with_weblink" id="with-weblink" value="1" {{ old('with_weblink', $listing->with_weblink ?? 0) ? 'checked' : '' }}>weblink toevoegen aan items</label> 
+                            
                         </fieldset>
                         <input type="hidden" name="room_id" value="{{$room->id}}">
                         <input type="hidden" name="subroom_id" value="{{ ($subroom->id ?? '')}}" >

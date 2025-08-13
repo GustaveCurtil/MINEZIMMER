@@ -42,10 +42,10 @@
                         @if ($listing->with_subtitle && $listingItem->subtitle)
                         <p>{{$listing->subtitle_label}}: {{$listingItem->subtitle}}</p>
                         @endif
-                        @if ($listingItem->description)
+                        @if ($listingItem->description && $listing->with_description)
                         <p>beschrijving: {{$listingItem->description}}</p>
                         @endif
-                        @if ($listingItem->weblink)
+                        @if ($listingItem->weblink && $listing->with_weblink)
                         <p><a href="{{$listingItem->weblink}}" target="_blank">weblink</a></p>
                         @endif
                     </details>

@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1><a href="{{ route('home') }}">MINEZIMMER</a></h1>
-        <a href="{{ str_replace('/zufugen', '', url()->current()) }}">terug</a>
+        <a href="{{ str_replace('/zufugen', '', url()->current()) }}">zuruck</a>
     </header> 
 </body>
 <main class="middle no-footer">
@@ -33,18 +33,22 @@
                         <input type="text" name="subtitle" id="subtitle" placeholder="{{$listing->subtitle_label}}" value="{{ old("subtitle") }}">
                         @endif
                         
+                        @if ($listing->with_description)
                         @error('description')
                         <p>⚠️ {{$message}}</p>
                         @enderror
                         <label for="description">Beschrijving</label>
                         <textarea name="description" id="description" placeholder="beschrijving">{{ old('description') }}</textarea>
+                        @endif
 
+                        @if ($listing->with_description)
                         @error('weblink')
                         <p>⚠️ {{$message}}</p>
                         @enderror
                         <label for="weblink">url</label>
                         <input type="text" name="weblink" id="weblink" placeholder="url" value="{{ old('weblink') }}">
-
+                        @endif
+                        
                         <input type="hidden" name="listing_id" value="{{$listing->id}}">
                     </fieldset>
 

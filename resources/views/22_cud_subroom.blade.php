@@ -15,9 +15,9 @@
             @endif
         </h1>
         @if ($update)
-        <a href="{{ str_replace('/bewerken', '', url()->current()) }}">terug</a>
+        <a href="{{ str_replace('/bewerken', '', url()->current()) }}">zuruck</a>
         @else
-        <a href="{{ str_replace('zimmermachen', 'machen', url()->current()) }}">terug</a>
+        <a href="{{ str_replace('zimmermachen', 'machen', url()->current()) }}">zuruck</a>
         @endif
 
     </header> 

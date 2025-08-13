@@ -12,9 +12,9 @@
         </h1>
         @if ($currentRoom->user->id === $user->id)
         @if ($currentRoom === $room)
-        <a href="{{ url('/' . $room->id . '/bewerken') }}">kamer bewerken</a>
+        <a href="{{ url('/' . $room->id . '/bewerken') }}">zimmer bewerken</a>
         @else
-        <a href="{{ url('/' . $room->id . '/s-' . $currentRoom->id . '/bewerken') }}">kamer bewerken</a>
+        <a href="{{ url('/' . $room->id . '/s-' . $currentRoom->id . '/bewerken') }}">zimmer bewerken</a>
         @endif
         @endif
     </header>
